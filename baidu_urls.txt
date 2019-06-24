@@ -1,3 +1,6 @@
+https://caojiangxia.github.io/torch-mod/
+https://caojiangxia.github.io/SVM/
+https://caojiangxia.github.io/Meissel-Lehmer/
 https://caojiangxia.github.io/kickstart2018G/
 https://caojiangxia.github.io/Matrix/
 https://caojiangxia.github.io/kickstart2019C/
