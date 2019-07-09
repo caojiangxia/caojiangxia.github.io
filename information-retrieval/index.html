@@ -1,0 +1,2456 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="information-retireval,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="信息检索课程复习笔记lecture-0 导论基本内容 布尔检索 倒排及各种索引 索引构建和压缩 向量检索 检索评价方法  高级内容 相关反馈及查询扩展 概率模型 语言模型 分类聚类 矩阵分解和LSI WEB采集、检索、链接分析  lecture-1 布尔检索信息检索是从大规模非结构化数据（通常是文本）的集合（通常保存在计算机上）中找出满足用户信息需求的资料（通常是文档）的过程。 布尔查询指的是利用">
+<meta name="keywords" content="information-retireval">
+<meta property="og:type" content="article">
+<meta property="og:title" content="信息检索课程复习笔记">
+<meta property="og:url" content="https://caojiangxia.github.io/information-retrieval/index.html">
+<meta property="og:site_name" content="caojiangxia">
+<meta property="og:description" content="信息检索课程复习笔记lecture-0 导论基本内容 布尔检索 倒排及各种索引 索引构建和压缩 向量检索 检索评价方法  高级内容 相关反馈及查询扩展 概率模型 语言模型 分类聚类 矩阵分解和LSI WEB采集、检索、链接分析  lecture-1 布尔检索信息检索是从大规模非结构化数据（通常是文本）的集合（通常保存在计算机上）中找出满足用户信息需求的资料（通常是文档）的过程。 布尔查询指的是利用">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4set4vsqxj30ca0mcgne.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4set5a3ovj30yg0jmmzt.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4sestzw7mj31100pagqh.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesvx800j31340p443b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4seswwjdwj315w0nyju8.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4set3dkwej313i0lyn1x.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesy9ipoj315i0jmjvf.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4set2whsdj30yg0mmae3.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4seszp45oj310c0pw77u.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4set4a4g3j31120roacx.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4set68saaj313s0rgdk6.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4sessr6qhj30yo0o8whm.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4set3spuvj30pi0mwta7.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4sesuy9e6j30va0k6ah9.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4sesxtvxwj31cm0gwjuv.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4set5oif6j30ym0le0wc.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4seswejukj30yc0k2wkl.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4set03bm6j30y00p2grd.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesyq7osj30xm0nawho.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4seszaspej31730u0qaz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesxd5x5j313l0u0775.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4sest381yj30w90u0acd.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4sesuiuphj319q0u0tg8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4set0voh8j31960tujxc.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4sestmyltj318p0u048g.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4set11f2ej312s0u0tft.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesvg6a0j31890u0q99.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4set1iobyj31ao0rmtf5.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4set1zlksj319x0u0jxq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4set2gd5zj31eo0tk781.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4sf2gl87gj317h0u045a.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqy4i8jj31eq0q8aee.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqs1vpvj318l0u00zb.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twr2f65xj31d20u0wkb.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twquxybgj318q0u07h4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr4wxquj31co0q6n3f.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr0wuztj31840ps79e.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqvd82zj310n0u0dj7.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqsqdmbj31860u0107.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqqbsbxj318k0rm78h.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqziqbuj317w0no767.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqt4178j314y0peafq.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twr026e8j311y0tajt0.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twr0gxf1j30v40tgdhc.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqwa96ej30zi0riq4v.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr3sagej30u80sojtb.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twr1x7m4j318i0oywhx.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twr1hgiwj318y0s8n2j.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqu0hyzj314s0pijuc.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqtinbxj31860u0n1w.jpg">
+<meta property="og:image" content="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqqwkplj31960mgn1z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr2xbjtj319k0ns79o.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqwqmigj31a60u00zq.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqq78t4j30uw09caat.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqvuhqoj31790u0wlp.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqug3vej31e00ow0y7.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqx6rqpj31d20tc451.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twr3diuhj30mw0cc3z4.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqxojshj31aj0u047l.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqyl31lj31bs0u0n2x.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqz327pj31bt0u0wjw.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4twpvk82jj31620qgjxg.jpg">
+<meta property="og:image" content="http://ww2.sinaimg.cn/large/006tNc79ly1g4tx8kcla5j31980oawjd.jpg">
+<meta property="og:image" content="http://ww3.sinaimg.cn/large/006tNc79ly1g4txdug4xaj314n0u0wm9.jpg">
+<meta property="og:updated_time" content="2019-07-09T13:55:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="信息检索课程复习笔记">
+<meta name="twitter:description" content="信息检索课程复习笔记lecture-0 导论基本内容 布尔检索 倒排及各种索引 索引构建和压缩 向量检索 检索评价方法  高级内容 相关反馈及查询扩展 概率模型 语言模型 分类聚类 矩阵分解和LSI WEB采集、检索、链接分析  lecture-1 布尔检索信息检索是从大规模非结构化数据（通常是文本）的集合（通常保存在计算机上）中找出满足用户信息需求的资料（通常是文档）的过程。 布尔查询指的是利用">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/006tNc79ly1g4set4vsqxj30ca0mcgne.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://caojiangxia.github.io/information-retrieval/">
+
+
+
+
+
+  <title>信息检索课程复习笔记 | caojiangxia</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">caojiangxia</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br>
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>
+            
+            Search
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://caojiangxia.github.io/information-retrieval/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kuroyukihime">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/lotus.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="caojiangxia">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">信息检索课程复习笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-07-09T21:55:59+08:00">
+                2019-07-09
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-07-09T21:55:59+08:00">
+                2019-07-09
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/ML/" itemprop="url" rel="index">
+                    <span itemprop="name">ML</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/information-retrieval/" class="leancloud_visitors" data-flag-title="信息检索课程复习笔记">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="信息检索课程复习笔记"><a href="#信息检索课程复习笔记" class="headerlink" title="信息检索课程复习笔记"></a>信息检索课程复习笔记</h1><h2 id="lecture-0-导论"><a href="#lecture-0-导论" class="headerlink" title="lecture-0 导论"></a>lecture-0 导论</h2><h3 id="基本内容"><a href="#基本内容" class="headerlink" title="基本内容"></a>基本内容</h3><ul>
+<li>布尔检索</li>
+<li>倒排及各种索引</li>
+<li>索引构建和压缩</li>
+<li>向量检索</li>
+<li>检索评价方法</li>
+</ul>
+<h3 id="高级内容"><a href="#高级内容" class="headerlink" title="高级内容"></a>高级内容</h3><ul>
+<li>相关反馈及查询扩展</li>
+<li>概率模型</li>
+<li>语言模型</li>
+<li>分类聚类</li>
+<li>矩阵分解和LSI</li>
+<li>WEB采集、检索、链接分析</li>
+</ul>
+<h2 id="lecture-1-布尔检索"><a href="#lecture-1-布尔检索" class="headerlink" title="lecture-1 布尔检索"></a>lecture-1 布尔检索</h2><p>信息检索是从大规模非结构化数据（通常是文本）的集合（通常保存在计算机上）中找出满足用户信息需求的资料（通常是文档）的过程。</p>
+<p><strong>布尔查询</strong>指的是利用AND,OR,NOT操作符将词项连接起来的查询。</p>
+<p>最基本的实现方式，构建一个单词-文档的01矩阵，之后暴力的从头到尾扫描所有的剧本。但是暴力方法的缺点有很多</p>
+<ul>
+<li>速度超慢（特别是大型文档集）</li>
+<li>处理NOT操作不容易。</li>
+<li>不容易支持其他操作（例如寻找A词附近的词B）</li>
+<li>不支持检索结果的排序，没有一个打分表示可信度</li>
+</ul>
+<p>优点：</p>
+<ul>
+<li>实现简单</li>
+<li>支持文档的动态添加</li>
+</ul>
+<p><strong>实现</strong>：取出用到的词的文档向量，之后NOT的取反，之后再进行位的&amp;操作。</p>
+<h4 id="文档的存储方式"><a href="#文档的存储方式" class="headerlink" title="文档的存储方式"></a>文档的存储方式</h4><p>假如有1百万篇文档=1M的量级，每篇约有1千个词=1K的量级，每个词约有6个字节。总共的词项约有500K个。</p>
+<p>这样的话，所有的文档占用的空间约为6G=1M 1K 6。这样的话文档集的大小约为500G = 500K 1M。因为是布尔类型，所以不需要乘上字节数。但是这个矩阵是极其稀疏的，所以我们在这里引入<strong>倒排索引</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4set4vsqxj30ca0mcgne.jpg" alt="image-20190702115412346"></p>
+<p>记录的是&lt;词项，文档频率，倒排表。</p>
+<p>同时在合并过程中，我们需要按照文档的频率排序后依次合并，这样的时间复杂度是最低的。</p>
+<h2 id="lecture2-词汇表和倒排记录表"><a href="#lecture2-词汇表和倒排记录表" class="headerlink" title="lecture2-词汇表和倒排记录表"></a>lecture2-词汇表和倒排记录表</h2><h3 id="词汇表的构建-中文分词"><a href="#词汇表的构建-中文分词" class="headerlink" title="词汇表的构建-中文分词"></a>词汇表的构建-中文分词</h3><ul>
+<li>是否使用词典</li>
+<li>正向最大匹配</li>
+<li>逆向最大匹配</li>
+<li>规则或统计方法</li>
+</ul>
+<p>遇到的两大难题：</p>
+<ul>
+<li>未登录词的问题($OOV$)</li>
+<li>歧义问题</li>
+<li>解决方法通常都是使用规则或者统计的方法进行处理</li>
+</ul>
+<p>归一化问题：</p>
+<ul>
+<li>剔除标点，连接符之类的： U.S.A = U.S.A. = USA</li>
+<li>时间的格式，有//格式的，：格式的，年月日格式的。</li>
+<li>大小写格式，毕竟dict里面都是大小写敏感的。单复数形式。甚至拼写错误</li>
+<li>非对称扩展，input: window ，out: window,windows. inputs windows output: Windows,windows,window.input :Windows out Windows.</li>
+<li>同义词词典(Thesauri)。car=automobile color=colour</li>
+<li>拼写错误（soundex）</li>
+<li>词形归并，将单词的变体还原成原形的形式。 Am,is,are = be，car cars=car</li>
+<li>词干还原（poter），对单词的前缀和后缀做一些改变，automate(s),automatic.automation 都变成automat</li>
+</ul>
+<h3 id="跳表指针"><a href="#跳表指针" class="headerlink" title="跳表指针"></a>跳表指针</h3><p>指针数目过多过少都不合适，要有一个均衡性:</p>
+<p>指针越多 ，跳步越短， 更容易跳转，但是需要更多的与跳表指针指向记录的比较</p>
+<p>指针越少 ， 比较次数越少，但是跳步越长 ， 成功跳转的次数少</p>
+<p>一般采用和分块一样的方式，使用$\sqrt n$的长度构建跳表</p>
+<h3 id="短语查询"><a href="#短语查询" class="headerlink" title="短语查询"></a>短语查询</h3><p>比如说stanford university，联合作为输入。这个时候university at standford就不能是答案了，因为规定了顺序的。但是正常的查询时间复杂度太高了</p>
+<h4 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h4><ul>
+<li>使用双词索引来解决，但是这样可能生成伪正例，需要再做一遍过滤才可以</li>
+<li>带位置信息的索引，对每个词都记录一下其在每篇文档中的位置进行存储<doc1:pos1,pos2,pos3….,;doc2:pos1,pos2></doc1:pos1,pos2,pos3….,;doc2:pos1,pos2></li>
+</ul>
+<p>实际上，带有位置信息的索引是现代信息检索的标配，实际问题中存在很多这样的查询</p>
+<h2 id="lecture-3-词典以及容错式检索"><a href="#lecture-3-词典以及容错式检索" class="headerlink" title="lecture-3 词典以及容错式检索"></a>lecture-3 词典以及容错式检索</h2><p>词典指的是存储<strong>词项词汇表</strong>的<strong>数据结构</strong></p>
+<ul>
+<li>词项词汇表：指的是具体数据</li>
+<li>词典：指的是数据结构</li>
+</ul>
+<p>采用定长数组的词典结构的话</p>
+<ul>
+<li>对每个词项，我们都需要存储<ul>
+<li>文档频率</li>
+<li>指向倒排记录表的指针</li>
+</ul>
+</li>
+<li>暂定每条词项的上述信息均采用定长的方式存储</li>
+<li>假定所有词项的信息采用数组存储</li>
+</ul>
+<h4 id="用于词项定位的数据结构"><a href="#用于词项定位的数据结构" class="headerlink" title="用于词项定位的数据结构"></a>用于词项定位的数据结构</h4><p>主要有两种数据结构：哈希表和树，准则主要为以下三点：</p>
+<ul>
+<li>词项的数目是否固定</li>
+<li>词项的相对访问频率</li>
+<li>词项的数目有多少个</li>
+</ul>
+<p>哈希表，也称散列表。就是输入一个字符串，输出一个数。好的哈希表应该有以下几个特点：</p>
+<ul>
+<li>每个词项通过哈希函数映射成一个整数</li>
+<li>尽可能避免冲突</li>
+<li>查询处理时：对查询词项进行哈希，如果有冲突，则解决冲突，最后在定长数组中定位</li>
+<li>优点：哈希表的定位速度快于树的查询速度，只需要常数时间就好了</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>无法解决词项的微小变形，换一个字符，定位的结果千差万别</li>
+<li>不支持前缀搜索，比如要auto-开头的所有的词</li>
+<li>如果词汇表不断增大，需要定期对所有词项重新哈希已减少冲突的概率。为什么呢？天天改动哈希函数不现实啊。。。。</li>
+</ul>
+<p>关于哈希：</p>
+<ul>
+<li>完美哈希&gt;最小完美哈希&gt;保留最小完美哈希</li>
+<li>局部敏感哈希，如simHash</li>
+<li>哈希学习：能够学习出哈希的编码</li>
+</ul>
+<p>哈希的用途</p>
+<ul>
+<li>查重（包括完全的重复和近似的重复，这是怎么做到的？？？）</li>
+<li>加密</li>
+<li>签名（这个也不是很懂。。）</li>
+</ul>
+<h3 id="树"><a href="#树" class="headerlink" title="树"></a>树</h3><p>优点</p>
+<ul>
+<li>树可支持前缀查找</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>二叉树的搜索速度低于哈希表的方式，为$\log M$，其中$M$是词汇表的大小，即所有词项的数目</li>
+<li>不过，$\log M$只对平衡树成立，但是要使得二叉树重新保持平衡的开销依然很大</li>
+</ul>
+<p>B树可以缓解上面的二叉树的压力，不过没说怎么做的。。。</p>
+<h3 id="通配符查询"><a href="#通配符查询" class="headerlink" title="通配符查询"></a>通配符查询</h3><p>例如：mon*nchen。需要在词项中找mon开头的和以nchen结尾的所有词，之后再做并集。不过这种做法的开销相对来说比较大。于是我们提出一种新的数据结构来辅助我们做通配符查询。</p>
+<h4 id="轮排索引"><a href="#轮排索引" class="headerlink" title="轮排索引"></a>轮排索引</h4><ul>
+<li>将通配查询词项进行旋转，之后使$*$出现在末尾</li>
+<li>将每个旋转后的词插入到词典中，也就是我们的数据结构当中</li>
+</ul>
+<p>对于hello，轮排索引中已经存储了 <em>hello**$</em>, <em>ello$h</em>, <em>llo$he</em>, <em>lo$hel**,</em> <em>o$hell</em>和<em>$hello</em>字符串</p>
+<p>查询处理</p>
+<ul>
+<li>输入查询为 X，则在轮排索引中寻找 X$字符串即可</li>
+<li>输入查询为 X*，则寻找以$X开始的字符串</li>
+<li>输入查询为 *X，则寻找以X$开始的字符串</li>
+<li>输入查询为 <em>X</em>，则寻找X开始的字符串即可，比如查询为<em>ello</em>，则只需要查到ello开头的串即可(上面是ello$h)，因为在轮排索引中，ello右部一定包含一个$，不论$是否处于尾部，该串均能满足查询<em>X</em></li>
+<li>输入查询为 X<em>Y, 则寻找Y$X开始的字符串，比如通配查询为 hel</em>o, 那么相当于要寻找o$hel开始的字符串</li>
+</ul>
+<p>轮排索引称为轮排树更恰当，但是轮排索引的称呼已经使用非常普遍</p>
+<h4 id="K-gram索引"><a href="#K-gram索引" class="headerlink" title="K-gram索引"></a>K-gram索引</h4><p>优点：</p>
+<ul>
+<li>比轮排索引空间开销要小一些</li>
+<li>枚举一个词项中所有连续的k个字符构成k-gram</li>
+</ul>
+<p>这样的话，我们有两个倒排表，第一个倒排表是词项-文档倒排表。第二个是k-gram-词项的倒排表</p>
+<p>方法也是很简单，例如查询mon*，我们改写为¥mon这样的查询，之后执行布尔查询$M and mo and on 这样的查询，得到所有可能的词项，但是这样难免会有伪正例出现，所以我们还需要再做一次过滤。</p>
+<p>用过滤剩下的词项在词项-文档的倒排索引中查找文档。</p>
+<p>对比</p>
+<ul>
+<li>k-gram索引的空间消耗小一些</li>
+<li>轮排索引不需要进行后面的过滤操作，使用简单</li>
+</ul>
+<h3 id="拼写矫正"><a href="#拼写矫正" class="headerlink" title="拼写矫正"></a>拼写矫正</h3><ul>
+<li>编辑距离方法</li>
+<li>k-gram，比如说整个匹配可以有三个失配的。也可以返回很多</li>
+<li>基于上下文语义的。去查询库搜索历史的记录是相对快速高效的方法</li>
+</ul>
+<h2 id="lecture-4-索引构建"><a href="#lecture-4-索引构建" class="headerlink" title="lecture-4 索引构建"></a>lecture-4 索引构建</h2><p>主要介绍两种索引构建算法BSBI和SPIMI</p>
+<p>基本知识：</p>
+<ul>
+<li>在内存中访问数据会比从硬盘访问数据快很多(大概10倍左右的差距)</li>
+<li>硬盘寻道时间是闲置时间：磁头在定位时不发生数据传输</li>
+<li>为优化从磁盘到内存的传送时间，一个大(连续)块的传输会比多个小块(非连续)的传输速度快</li>
+<li>硬盘I/O是基于块的:读写时是整块进行的。块大小：8KB到256KB不等</li>
+<li>IR系统的服务器的典型配置是几个GB的内存，有时内存可能达到几十GB，数百G或者上T的硬盘。</li>
+<li>容错处理的代价非常昂贵：采用多台普通机器会比一台提供容错的机器的价格更便宜</li>
+</ul>
+<h3 id="BSBI"><a href="#BSBI" class="headerlink" title="BSBI"></a>BSBI</h3><p>首先我们定义文档记录为一个三元组对表示为<termid,docid,df>，其实我个人觉得DF可以不需要，32位的话，就是4个字节了。于是这里每一个倒排记录的大小就是4*3=12KB</termid,docid,df></p>
+<ul>
+<li>将文档集分割成几个大小相同的部分，分割的原则是基于内存的大小去进行划分</li>
+<li>将每个部分的词项ID-文档ID对进行排序，这里的排序很傻逼。。。。之后合并为倒排索引表</li>
+<li>将现在有的倒排索引表放到内存里面</li>
+<li>将所有的中间文件合并为最后的索引</li>
+</ul>
+<p>最后一步的方法需要使用优先队列这样的数据结构，首先为10个位置各弄一个缓冲区，之后每次合并最小的未处理的倒排表的termID所对应的倒排表。弄完一个就写一个。</p>
+<h3 id="SPIMI"><a href="#SPIMI" class="headerlink" title="SPIMI"></a>SPIMI</h3><p>假如说内存连词表都放不下怎么办？那我们在构建索引的时候，就能不使用ID了，我们干脆使用term的字典序就好了。这样的话</p>
+<ul>
+<li>每来一个词，我们看它是不是出现过，要么新建，要么添加到后面</li>
+<li>如果添加满了，那么倒排表翻倍</li>
+<li>内存满了的话，我们就把词项安字典序排一下。之后存到硬盘上就好了</li>
+<li>合并硬盘上的这些块，完事了。</li>
+</ul>
+<h3 id="MapReduce"><a href="#MapReduce" class="headerlink" title="MapReduce"></a>MapReduce</h3><p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4set5a3ovj30yg0jmmzt.jpg" alt="image-20190702210409046"></p>
+<p>值得注意的是，Map和Reduce阶段，一个普通机器即可以作为分析器，也可以作为索引器，可以混用，没什么关系的。</p>
+<h3 id="动态构建索引"><a href="#动态构建索引" class="headerlink" title="动态构建索引"></a>动态构建索引</h3><p>使用主索引+辅助索引的方法进行构建</p>
+<ul>
+<li><p>在磁盘上维护一个大的主索引(Main index)</p>
+<p>新文档放入内存中较小的辅助索引中</p>
+<p>同时搜索两个索引，然后合并结果</p>
+<p>定期将辅助索引合并到主索引中</p>
+</li>
+</ul>
+<p>但是上面的方法很有可能在合并的时候过于频繁，于是这里应该采用对数合并的方法进行合并。</p>
+<h3 id="对数合并"><a href="#对数合并" class="headerlink" title="对数合并"></a>对数合并</h3><p>这个合并的方式和之前的算法里面学到的二项式堆合并的方式几乎一样，在这里不再赘述啦。</p>
+<h2 id="lecture-5-压缩索引"><a href="#lecture-5-压缩索引" class="headerlink" title="lecture-5 压缩索引"></a>lecture-5 压缩索引</h2><p>为什么我们要压缩？</p>
+<ul>
+<li>减少磁盘空间 (节省开销)</li>
+<li>增加内存存储内容 (加快速度)</li>
+<li>加快从磁盘到内存的数据传输速度 (同样加快速度)</li>
+<li>[读压缩数据到内存+在内存中解压]比直接读入未压缩数据要快很多</li>
+<li>前提: 解压速度很快</li>
+<li>首先需要压缩词典的大小，尽量让它放进内存中。</li>
+</ul>
+<h3 id="有损压缩"><a href="#有损压缩" class="headerlink" title="有损压缩"></a>有损压缩</h3><p>通过一些与处理步骤其实可以看成有损压缩，比如说统一小写，去停用词之类的。</p>
+<h3 id="无损压缩"><a href="#无损压缩" class="headerlink" title="无损压缩"></a>无损压缩</h3><p>解压后能够完全还原原本的信息。对于倒排索引来说，应该使用无损压缩。 </p>
+<h3 id="预测词表大小的方法"><a href="#预测词表大小的方法" class="headerlink" title="预测词表大小的方法"></a>预测词表大小的方法</h3><p>采用heaps定律，这基于一个经验性的规律，公式如下：</p>
+<script type="math/tex; mode=display">
+M=kT^b</script><p>其中$M$是词汇表的大小，$T$是文档集的大小（所有条词的个数，即所有文档大小之和）</p>
+<p>其中参数k和b是经验性的参数，$30&lt;k&lt;100,b=0.5+-0.2$</p>
+<h3 id="词表的存储方式"><a href="#词表的存储方式" class="headerlink" title="词表的存储方式"></a>词表的存储方式</h3><ul>
+<li>首先，a,aaaa,相同对待。那么会有大量的浪费</li>
+<li>于是我们采用不定长的数组，采用一个字符串，之后只要记录索引就好了</li>
+<li>但是每个单词都建索引还是有些浪费，于是我们采用块为单位进行存储，假如每四个为一个小块的话，又可以省下很多空间，不过速度会慢一些</li>
+<li>但是采用块的存储方式的话，块内会有很多相同的前缀，于是我们可以再进行压缩。</li>
+</ul>
+<h3 id="倒排记录表的压缩"><a href="#倒排记录表的压缩" class="headerlink" title="倒排记录表的压缩"></a>倒排记录表的压缩</h3><p>倒排记录表的大小极大，至少是词表的10倍以上。</p>
+<ul>
+<li>这里的压缩关键就是，对每条倒排记录进行压缩。我们不采用32位进行存储，而是采用更小的位来进行存储。</li>
+<li>存储docID的间隔，而不是docID本身。对于这些词可以通过这种方式确实是可以减少开销</li>
+<li>而且高频词的间隔小，可以更小的方式存储</li>
+<li>所以我们可采用更小的比特存储这些间隔</li>
+</ul>
+<h3 id="变长编码"><a href="#变长编码" class="headerlink" title="变长编码"></a>变长编码</h3><p>目标：</p>
+<ul>
+<li>对于asdzxcqweqweqwe等一些罕见词，每个间隔仍然使用20bit的。</li>
+<li>对于the,i,什么间隔较短的，采用更短的编码</li>
+</ul>
+<p>于是需要设计一个变长的编码</p>
+<p>变长的编码对于小间隔采用短编码对于长间隔采用长编码</p>
+<h3 id="可变字节VB码"><a href="#可变字节VB码" class="headerlink" title="可变字节VB码"></a>可变字节VB码</h3><ul>
+<li>其被很多商用和研究系统所采用</li>
+<li>设定一个专用的高位c作为延续位</li>
+<li>如果间隔少于7个bit位的话，那么c置为1，同时将间隔编入一个字节的后7位当中</li>
+<li>否则：将高的7位放入到当前的字节中，同时将c置为0，剩下的位数采用相同的方法进行处理，最后一个字节的c置为1，表示结束，<strong>从高到低编码</strong></li>
+<li>就是每7位一个编码，之后塞0即可，最后一个位置塞1就好了。本来贼简单的一个东西，搞得怎么复杂。真是醉了。</li>
+</ul>
+<h3 id="r编码"><a href="#r编码" class="headerlink" title="r编码"></a>r编码</h3><p>先写成二进制的形式，之后我们保留除第一位以外的其他位。把第一位换成1…10的形式，其中1的个数等于后面保留的位数。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>到此为止，我们可以得到一个空间上十分节省的支持布尔检索的索引，大小占原文本的10%-15%左右。不过这里没有考虑到词项出现的位置信息和频率信息。因此，实际当中，我们是达不到这样的压缩比的，因为位置信息其实是十分庞大的。</p>
+<h2 id="lecture-6-文档评分、词项权重计算和向量空间模型"><a href="#lecture-6-文档评分、词项权重计算和向量空间模型" class="headerlink" title="lecture-6 文档评分、词项权重计算和向量空间模型"></a>lecture-6 文档评分、词项权重计算和向量空间模型</h2><p>布尔检索的优点：</p>
+<ul>
+<li>对自身需求和文档集的性质非常了解的专家来说，布尔查询是很好的选择</li>
+<li>对应用开发来说也非常简单，很容易就返回1000+的结果</li>
+</ul>
+<p>布尔检索的不足：</p>
+<ul>
+<li>对大多数用户来说不方便，大部分用户不能撰写出布尔查询或者需要大量训练才能撰写出合适的布尔查询</li>
+<li>大部分用户不想阅读1000+的结果，对于web网页搜索更是这样，希望第一个就是想要的。</li>
+</ul>
+<p>排序式检索可以通过对查询和文档的匹配程度进行排序，会对一个查询和文档得到匹配的评分，同时可以避免产生过多或者过少的结果。</p>
+<h3 id="jaccard系数"><a href="#jaccard系数" class="headerlink" title="jaccard系数"></a>jaccard系数</h3><ul>
+<li><p>这是计算两个集合的重合度的常用方法</p>
+</li>
+<li><p>令A和B为两个集合</p>
+</li>
+<li><p>jaccard系数的计算方法也很简单</p>
+<script type="math/tex; mode=display">
+Jaccard(A,B)=\frac {|A \& B|} {|A|B|}</script></li>
+<li><p>$jaccard(x,x)=1$</p>
+</li>
+<li><p>$A,B$的大小不需要相同</p>
+</li>
+</ul>
+<p>例子：查询$ides\quad of \quad March$，文档$caesar\quad died \quad in \quad March$。</p>
+<p>那么$jaccard$距离为$\frac 1 6$</p>
+<p>缺点也是十分明显的</p>
+<ul>
+<li>没有考虑词项的频率，即词项在文档中出现的次数</li>
+<li>一般来说，罕见词比高频词的信息量要更大，$J$没有考虑这个信息</li>
+<li>没有仔细考虑文档的长度，这样的话，长文档的劣势明显啊</li>
+</ul>
+<h3 id="扩展的布尔模型"><a href="#扩展的布尔模型" class="headerlink" title="扩展的布尔模型"></a>扩展的布尔模型</h3><p>基本思想就是在布尔模型的基础上加入向量空间模型，和向量空间模型一样，首先是将每篇文档表示为$N$维空间上的一个点，比如说：文档$d_j$中词项$k_x$对应的分量可以按下面的方式计算：</p>
+<script type="math/tex; mode=display">
+w_{x,j}=\frac {freq_{x,j}} {\max_lfreq_{l,j}}\cdot \frac {idf_x} {\max_i idf_i}</script><p>上面的可以暂时不管，就是一个计算权值的方式。</p>
+<p>扩展后对于OR的操作就很简单了，<img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4sestzw7mj31100pagqh.jpg" alt="image-20190703192613947"></p>
+<p>AND的操作也不是很难：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesvx800j31340p443b.jpg" alt="image-20190703192643981"></p>
+<p>于是我们有下面的公式：</p>
+<p>对于$or$操作，有：</p>
+<script type="math/tex; mode=display">
+sim(q_{or},d)=\sqrt{\frac {x_1^2+x_2^2+....+x_m^2} {m}}</script><p>对于$and$操作，有：</p>
+<script type="math/tex; mode=display">
+sim(q_{and},d)=1-\sqrt{\frac {(1-x_1)^2+(1-x_2)^2+...+(1-x_m)^2} {m}}</script><p>或者说我们不采用欧式距离，采用$p-norm$也是可以的，计算起来只需要把幂次替换一下就好了。</p>
+<p>优点，提供了一个统一的框架，将向量空间模型、基于模糊集的模型都包括在一个框架内。</p>
+<p>缺点，不够简洁和自然</p>
+<h3 id="基于模糊集的检索模型"><a href="#基于模糊集的检索模型" class="headerlink" title="基于模糊集的检索模型"></a>基于模糊集的检索模型</h3><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4seswwjdwj315w0nyju8.jpg" alt="image-20190703193632289"></p>
+<p>模糊集合：</p>
+<p>函数刻画的是元素$x$到$A$的隶属度，值域在$[0,1]$之间。比如说”比1大的多的数”，于是我们有：</p>
+<script type="math/tex; mode=display">
+\mu_A(x)=\frac 1 {1+100/(x-1)^2}\quad if\quad x>1</script><p>模糊集合也存在非、并、交的运算。满足下面的公式</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+\mu_{!A}(x)&=&1-\mu_A(x)\\
+\mu_{A | B}(x)&=&\max(\mu_A(x),\mu_B(x))\\
+\mu_{A\&B}(x)&=&\min(\mu_A(x),\mu_B(x))
+\end{eqnarray}</script><p><strong>首先定义一下词项之间的相关程度：</strong>建立一个相关性词典，我们有如下的公式：</p>
+<script type="math/tex; mode=display">
+c_{ij}=\frac {n_{ij}} {n_i+n_j-n_{ij}}</script><p>其次是顶一下<strong>词项和文档之间的关系</strong>：对于一个词$t_i$建立一个模糊集合$A_i$，其元素是所有的文档集合。公式很简单，就是文章中和$t$相似的词越多，那么相似程度就越大。文档为$j$，词项为$i$</p>
+<script type="math/tex; mode=display">
+\mu_{ij}=1-\prod_{t_j\in d_j}(1-c_{ij})</script><p>之后我们就可以定义查询q和文档之间的关系了，就是拆成布尔表达式，在调用上面的式子就好了</p>
+<p>优点：</p>
+<ul>
+<li>克服原始的布尔模型的不能部分匹配的缺点</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>通常在模糊集研究领域设计，在检索领域不流行，倾向于单词完全匹配</li>
+<li>缺乏大规模语料上的实验验证其有效性</li>
+</ul>
+<h3 id="查询-文档的匹配得分计算"><a href="#查询-文档的匹配得分计算" class="headerlink" title="查询-文档的匹配得分计算"></a>查询-文档的匹配得分计算</h3><p>先从一个单词开始说起吧</p>
+<h4 id="TF"><a href="#TF" class="headerlink" title="TF"></a>TF</h4><ul>
+<li>如果该词项没有出现在文档中，那么得分为0</li>
+<li>如果这个词项出现的越多，那么得分应该越高</li>
+</ul>
+<p>定义$tf_{t,d}$角标的含义是一个词项$t$在一个文档$d$中出现的次数。是与文档相关的一个量，可以认为是文档内代表度的一个量，也可以认为是一种局部信息。</p>
+<p>但是tf值表示的值可以不能很好的度量相关度，因为信息是逐渐递减的，0-1比1-2的作用更大。</p>
+<p>于是我们有<strong>对数词频</strong>$w_{t,d}$。</p>
+<p>$w_{t,d}=1+\log_2 tf_{td}\quad if \quad tf_{td}&gt;0$</p>
+<p>于是查询$q$和文档$d$的相似度计算就是：这样也可以解决部分匹配的问题了，这样也可以决解部分匹配的问题</p>
+<script type="math/tex; mode=display">
+\sum_{t \in q \& d }(1+\log tf_{td})</script><h4 id="词袋模型"><a href="#词袋模型" class="headerlink" title="词袋模型"></a>词袋模型</h4><ul>
+<li>不考虑词在文档中出现的顺序</li>
+<li>这种的假设被称为词袋模型</li>
+</ul>
+<h3 id="TFIDF权重计算"><a href="#TFIDF权重计算" class="headerlink" title="TFIDF权重计算"></a>TFIDF权重计算</h3><p>意思其实很简单：</p>
+<ul>
+<li>文档中的词频 - TF</li>
+<li>文档集中的词频 - IDF</li>
+<li>因为<strong>罕见词</strong>所包含的信息要更多一些。</li>
+<li>考虑查询中的某一个词项，如果它在所有的文档中出现的次数很少的话，那么它很可能与整篇文档十分相关</li>
+<li>于是我们应该把这样的罕见词的权重设的更高一些</li>
+</ul>
+<h2 id="文档频率-DF"><a href="#文档频率-DF" class="headerlink" title="文档频率-DF"></a>文档频率-DF</h2><ul>
+<li>对于罕见词我们赋予高权重</li>
+<li>对于常见词我们赋予低权重</li>
+<li>于是我们就可以使用文档频率DF这个因子来计算 查询-文档 的匹配得分</li>
+<li>文档频率（DF）指的是出现这个词项的文档数目</li>
+</ul>
+<h4 id="逆文档频率idf"><a href="#逆文档频率idf" class="headerlink" title="逆文档频率idf"></a>逆文档频率idf</h4><p>$df_t$是出现词项$t$的文档的数目</p>
+<p>$idf_t$是和词项$t$的信息量成反比的一个值</p>
+<p>于是我们可以定义词项$t$的idf权重，也就是逆文档频率：</p>
+<script type="math/tex; mode=display">
+idf_t=\log_{10} \frac {N} {df_t}</script><p>其中$N$是文档集中文档的数目。</p>
+<ul>
+<li>$idf_t$实际上反应的是一个词项$t$的信息量的一个指标，是一种全局信息的指标</li>
+<li>不过实际上我们用的都是$\log$之后的值，而不是原本的值，这是因为$\log$确实十分有用啊，可以做到很好的抑制效果</li>
+<li>同时，我们对tf值也是取$log$的。</li>
+</ul>
+<h3 id="权重的计算"><a href="#权重的计算" class="headerlink" title="权重的计算"></a>权重的计算</h3><p>于是，我们有了tf,idf之后，我们对于每一个词项，都能得到其在该文档中的权重，我们可以表示为：</p>
+<script type="math/tex; mode=display">
+w_{t,d}=(1+\log tf_{t,d})\cdot \log \frac N {df_t}</script><h3 id="向量空间模型"><a href="#向量空间模型" class="headerlink" title="向量空间模型"></a>向量空间模型</h3><p>通过td,idf。我们可以把每篇文章都表示为一个基于tfidf权重的实值向量</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4set3dkwej313i0lyn1x.jpg" alt="image-20190704111055921"></p>
+<p>表示的当时也很简单：</p>
+<ul>
+<li>每篇文档都比表示为一个tfidf权重的实值向量$\in R^{|V|}$</li>
+<li>于是，我们可以得到一个$|V|$维的实值空间</li>
+<li>空间的每一维都对应着一个词项</li>
+<li>一个文档都是这个空间下的一个点或者是一个向量</li>
+<li>对于词项很多很多的情况下，空间的维度特别特别大</li>
+<li>但是一篇文档的向量又是十分稀疏的，大部分时候，元素的值都是0。这就会带来一些问题了</li>
+</ul>
+<h3 id="计算查询和文档的相似度的话"><a href="#计算查询和文档的相似度的话" class="headerlink" title="计算查询和文档的相似度的话"></a>计算查询和文档的相似度的话</h3><p>首先，我们把查询经过和文档一样的操作。得到一个tfidf的向量。之后我们使用余弦相似度这样的方法得到一个实值，这样可以衡量相似度了。</p>
+<ul>
+<li>欧式距离，但这不是一个好的选择，因为欧式距离对向量的长度十分敏感</li>
+<li>采用余弦相似度计算夹角，这样的话，确实有着很好的优点，缺点就是欧式距离可能很大，同时如果查询词项过少的话，也会有一些问题。同时余弦相似度越大，那么夹角就越小。</li>
+</ul>
+<p><strong>但是这对短文本不公平啊</strong>，因为长文本的tf值要大，但是idf却不变。于是我们一个想办法来平衡一下长文本和短文本之间的tf值的差距。</p>
+<p>为了更好的衡量余弦相似度，我们可以通过除以它的长度进行归一化，就是把每个文档的向量都映射到一个单位球面上。这样的方式也很简单，每一维除上模长就好了。也被叫做$L2$范数。其实就是很简单的东西，非要叫的这么复杂。</p>
+<p>通过上面的操作的话，我们可以把长文本或者短文本都相对公平的对待。</p>
+<p>余弦相似度的计算也很简单：</p>
+<script type="math/tex; mode=display">
+cos(A,B)=\frac {A\cdot B} {|A|\cdot|B|}</script><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesy9ipoj315i0jmjvf.jpg" alt="image-20190704113236371"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4set2whsdj30yg0mmae3.jpg" alt="image-20190704113250626"></p>
+<p>总结，向量空间模型的三个步骤：</p>
+<ul>
+<li>词项选择</li>
+<li>权重计算</li>
+<li>相似度的计算</li>
+<li>Tf ，反应的是局部信息</li>
+<li>Idf，反应的是词项在文档中的权重，全局信息</li>
+<li>tfidf，综合全部信息和局部信息，反应词在文档中的权重</li>
+<li>长度因素，需要归一化。</li>
+</ul>
+<h2 id="lecture-7-完整搜索系统中的评分计算方式"><a href="#lecture-7-完整搜索系统中的评分计算方式" class="headerlink" title="lecture-7 完整搜索系统中的评分计算方式"></a>lecture-7 完整搜索系统中的评分计算方式</h2><h3 id="结果排序的动机"><a href="#结果排序的动机" class="headerlink" title="结果排序的动机"></a>结果排序的动机</h3><ul>
+<li>主要是用户不希望看到太多的查询，而是最有可能是答案的几条结果</li>
+<li>对于大规模的数据来说，我们也很难构造只返回几片文档的查询。</li>
+<li>排序可以使成千上万的结果缩减成几条结果，所以这个是很重要的</li>
+</ul>
+<h3 id="余弦归一化"><a href="#余弦归一化" class="headerlink" title="余弦归一化"></a>余弦归一化</h3><p>实际上，余弦归一化倾向于短文本，换句话说就是长文本的模长太大了，导致除的时候损失了很多的信息。但是短文本的话，损失的信息相对比较少。于是我们应该在这里面找到一个平衡。</p>
+<h3 id="回转归一化"><a href="#回转归一化" class="headerlink" title="回转归一化"></a>回转归一化</h3><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4seszp45oj310c0pw77u.jpg" alt="image-20190704135737420"><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4set4a4g3j31120roacx.jpg" alt="image-20190704135759898"></p>
+<p>于是，他根据上面的表，找一个最平衡的位置。效果确实提升了很多。</p>
+<h3 id="结果排序的实现"><a href="#结果排序的实现" class="headerlink" title="结果排序的实现"></a>结果排序的实现</h3><ul>
+<li>倒排索引上，需要再添加一个$tf_{t,d}$的信息，表示这个文档中出现了几次</li>
+<li>之后就计算余弦相似度就好了。这时候其实是可以解决部分匹配的问题的。</li>
+</ul>
+<p>计算的方式很简单：</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4set68saaj313s0rgdk6.jpg" alt="image-20190704140549453"></p>
+<p>精确的top-k的检索和加速的办法：</p>
+<p>对每个文档评分，计算余弦相似度，之后按照评分的高低进行排序，选出前$k$个结果。</p>
+<p>加速的方式：</p>
+<ul>
+<li>加快每个余弦相似度的计算</li>
+<li>不进行全部的排序就能得到top-k</li>
+<li>不对所有的文档进行评分，而是只进行部分的计算就可以选出前top-k个</li>
+</ul>
+<p>一般来说，在高纬空间下，计算余弦相似度没有很好的办法，但是对于一些特例还是可以加速的</p>
+<h3 id="查询词项无权重的话"><a href="#查询词项无权重的话" class="headerlink" title="查询词项无权重的话"></a>查询词项无权重的话</h3><p>换句话说，查询中每个查询都出现一次。这样的话，我们不需要给查询向量做归一化操作了。</p>
+<h3 id="不进行全部的排序"><a href="#不进行全部的排序" class="headerlink" title="不进行全部的排序"></a>不进行全部的排序</h3><p>这个就是经典的办法了，固定一个大小为$k$的堆</p>
+<h3 id="提前终止计算"><a href="#提前终止计算" class="headerlink" title="提前终止计算"></a>提前终止计算</h3><p>我们引入PageRank进行辅助计算。所谓PageRank其实很简单，就是有多少度量是好的页面指向d的一种指标。</p>
+<p>这个时候我倒排索引不再按照docID进行排序，而是根据PageRank进行排序。之后我们就可以假设余弦相似度为1的情况下都不会超过限制的结果，就不用再算了。</p>
+<h3 id="我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了"><a href="#我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了" class="headerlink" title="我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了"></a>我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了</h3><h4 id="索引去除"><a href="#索引去除" class="headerlink" title="索引去除"></a>索引去除</h4><p>在一般的检索方法中，我们通常只考虑至少包含一个查询词项的文档</p>
+<p>我们可以扩展这种思路：</p>
+<ul>
+<li><strong>只考虑那些包含高idf查询词项的文档</strong>。注意是高idf<strong>查询词</strong>。</li>
+<li>只考虑出现了多个查询词的文档，比如出现至少三个查询词的文档</li>
+</ul>
+<h4 id="胜者表"><a href="#胜者表" class="headerlink" title="胜者表"></a>胜者表</h4><p>对于查询中的每个词项$t$。先统计出倒排记录表中权重最高的$r$篇文档，如果我们采用$tfidf$机制的话，那么词项的$idf$值就固定了，我们只需要保存$tf$前$r$大的docID就好了。</p>
+<ul>
+<li>这$r$篇文档就被称为$t$的胜者表</li>
+<li>也称为优胜表和高分文档</li>
+</ul>
+<p>之后把所有查询词的胜者表做一个并集就好了。这个集合里面的top k 就可以认为是最好的top k。</p>
+<h3 id="静态质量得分排序方式"><a href="#静态质量得分排序方式" class="headerlink" title="静态质量得分排序方式"></a>静态质量得分排序方式</h3><p>我们希望排名靠前的文档，不仅仅相关度高，而且最好是官网之类的，这样的网站的权威度会高很多。等于说我们希望找一个相关度和权威度都很高的方法。</p>
+<p>相关度我们常常用余弦相似度来衡量。</p>
+<p>但是权威度是网站本身的性质。我们可以用类似pagerank的方式做一个胜者表</p>
+<h4 id="影响度排序"><a href="#影响度排序" class="headerlink" title="影响度排序"></a>影响度排序</h4><p>如果只想对$wf_{t,d}$的维度比较大的文档集进行计算的话。我们就可以把文档按照$w_{tf}$进行排序。</p>
+<ul>
+<li>提前结束法，只访问索引中前$r$个</li>
+<li>$wf_{t,d}$小雨了某个预定的阈值</li>
+<li>之后将对于所有的t的集合合并</li>
+</ul>
+<p>或者是</p>
+<ul>
+<li>将词项按照idf进行排序，之后会不断的更新文档的得分。直到文档的得分基本不变的话，我们就停止</li>
+</ul>
+<h4 id="簇剪枝"><a href="#簇剪枝" class="headerlink" title="簇剪枝"></a>簇剪枝</h4><p>随便选择$\sqrt(n)$篇文档作为先导者</p>
+<p>对于其他文档，先计算离它最近的先导者，称为追随者。这样的话，平均下来一个先导者一个差不多有$\sqrt n$个追随者。</p>
+<p>查询的时候，先找到离它最近的先导者。之后从这个先导者维护的集合中，计算前$k$大。</p>
+<h2 id="lecture-8-检索的评价"><a href="#lecture-8-检索的评价" class="headerlink" title="lecture-8 检索的评价"></a>lecture-8 检索的评价</h2><p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4sessr6qhj30yo0o8whm.jpg" alt="image-20190704160034336"></p>
+<p>召回率：</p>
+<script type="math/tex; mode=display">
+recall=\frac {RR} {RR+NR}</script><p>正确率：</p>
+<script type="math/tex; mode=display">
+precision= \frac {RR} {RR+RN}</script><p>实际上，在信息检索中，召回率难以计算，不过解决办法是Pooling方法，或者是不考虑召回率</p>
+<h3 id="Pooling方法计算召回率"><a href="#Pooling方法计算召回率" class="headerlink" title="Pooling方法计算召回率"></a>Pooling方法计算召回率</h3><p>对多个检索系统的Top-k个结果组成的集合进行人工标注，标注出的相关文档作为整个相关文档集合。这种做法被认为是可行的<img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4set3spuvj30pi0mwta7.jpg" alt="image-20190704160644941"></p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4sesuy9e6j30va0k6ah9.jpg" alt="image-20190704171146623"></p>
+<h2 id="F-X的值的计算"><a href="#F-X的值的计算" class="headerlink" title="F-X的值的计算"></a>F-X的值的计算</h2><script type="math/tex; mode=display">
+F_\beta =\frac {(1+\beta ^2)PR} {\beta^2P+R}</script><p>其中$\beta$表示的是召回率的重要程度是正确率的$\beta$倍，其中$\beta &gt;1$更重视<strong>召回率</strong>，$\beta &lt;1$更重视<strong>正确率</strong></p>
+<ul>
+<li>缺点，没有考虑到最后结果的顺序。排在前面的结果往往更加重要</li>
+</ul>
+<h3 id="精确率Accuracy的计算方式"><a href="#精确率Accuracy的计算方式" class="headerlink" title="精确率Accuracy的计算方式"></a>精确率Accuracy的计算方式</h3><script type="math/tex; mode=display">
+accuracy= \frac {RR+NN} {RN+RR+NR+NN}</script><p>但是精确率并不适合信息检索，因为NN的实在是太多了</p>
+<h3 id="P-R曲线"><a href="#P-R曲线" class="headerlink" title="P-R曲线"></a>P-R曲线</h3><p>计算方法，对于第$i$个点。$P$的值就是：做对的/$i$。$R$的值就是：做对的/总共的标准答案的个数。</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4sesxtvxwj31cm0gwjuv.jpg" alt="image-20190705235204542"></p>
+<p>优点：</p>
+<ul>
+<li>简单直观</li>
+<li>考虑了结果的覆盖度，又考虑了结果的排序情况</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>单个查询的$P-R$曲线直观，但是两个查询的话如何比较却不明了。</li>
+</ul>
+<h3 id="平均正确率-Average-Precision"><a href="#平均正确率-Average-Precision" class="headerlink" title="平均正确率(Average Precision)"></a>平均正确率(Average Precision)</h3><p>作用，对不同<strong>召回率</strong>上的点进行正确率的平均。计算的方式也是很奇葩： </p>
+<h4 id="对于未插值的AP来说，这也是最常用的方法："><a href="#对于未插值的AP来说，这也是最常用的方法：" class="headerlink" title="对于未插值的AP来说，这也是最常用的方法："></a>对于未插值的AP来说，这也是最常用的方法：</h4><p>假设对于某一个查询Q来说，有6篇相关文档。但是一个检索系统只返回了5篇的话，并且位置分别是第1，2，5，10，20位。则我们有AP值如下：</p>
+<script type="math/tex; mode=display">
+AP = \frac {1/1+2/2+3/5+4/10+5/20+0} {6}</script><p>其中分子是召回率变化的点，分子是总的相关的文档数。</p>
+<h4 id="插值的AP"><a href="#插值的AP" class="headerlink" title="插值的AP"></a>插值的AP</h4><p>分别在召回率为0.1，0.2，0.3，。。。，1.0的十一个点上求平均值。等价于11个点的平均。</p>
+<h4 id="只对返回的相关的文档计算AP值"><a href="#只对返回的相关的文档计算AP值" class="headerlink" title="只对返回的相关的文档计算AP值"></a>只对返回的相关的文档计算AP值</h4><p>这个就很简单了，相对于第一种，我们只需要改变分子的数量为返回的相关文档数就好。</p>
+<script type="math/tex; mode=display">
+AP = \frac {1/1+2/2+3/5+4/10+5/20} {5}</script><h4 id="不考虑召回率的时候"><a href="#不考虑召回率的时候" class="headerlink" title="不考虑召回率的时候"></a>不考虑召回率的时候</h4><p>precision@N: 在第N个位置上的正确率，对于大部分搜索引擎来说，这个还是很有用的。一般只用P@10和P@20的值</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4set5oif6j30ym0le0wc.jpg" alt="image-20190705231220137"></p>
+<h4 id="多查询的评价方式"><a href="#多查询的评价方式" class="headerlink" title="多查询的评价方式"></a>多查询的评价方式</h4><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4seswejukj30yc0k2wkl.jpg" alt="image-20190705231442448"></p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4set03bm6j30y00p2grd.jpg" alt="image-20190705231702305"></p>
+<h4 id="NDCG"><a href="#NDCG" class="headerlink" title="NDCG"></a>NDCG</h4><p>首先定义了每个文章是否相关，和每篇文章的相关度。对于一个查询，我们有返回的list。返回的list里面有相关度。</p>
+<p>首先我们知道最佳的答案序列$I$。之后我们做一个前缀和$CG$。但是前缀和有两种方式，一种是$CG$，一种是$DCG$。</p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesyq7osj30xm0nawho.jpg" alt="image-20190705233408359"></p>
+<p>现在有两种方式了。之后我们再做查询$Q$的$DCG$第$i$位除上完美序列$I$的$DCG$的结果，得到比率就好了。</p>
+<p>算起来其实很简单。</p>
+<h2 id="lecture-9-相关反馈及查询扩展"><a href="#lecture-9-相关反馈及查询扩展" class="headerlink" title="lecture-9 相关反馈及查询扩展"></a>lecture-9 相关反馈及查询扩展</h2><h3 id="平均数的扩展"><a href="#平均数的扩展" class="headerlink" title="平均数的扩展"></a>平均数的扩展</h3><p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4seszaspej31730u0qaz.jpg" alt="image-20190705234746163"></p>
+<p>以上都是算数平均数</p>
+<h3 id="查询扩展和相关反馈"><a href="#查询扩展和相关反馈" class="headerlink" title="查询扩展和相关反馈"></a>查询扩展和相关反馈</h3><h4 id="动机"><a href="#动机" class="headerlink" title="动机"></a>动机</h4><p>我们需要提升召回率，我们所需要做的就是输入一个查询词，返回尽量多的<strong>有效文档</strong>，但是这里的有效文档和相关文档还是有很大区别的。</p>
+<p>对于一个查询jaguar来说：</p>
+<p>所谓有效文档，是jaguar(美洲虎;一种汽车品牌)+panthera(豹属)加起来构成的。</p>
+<p>但是对于用户的相关文档来说，可能只是第一种是想要的结果。</p>
+<p>换句话说：<strong>通过查询扩展的方式，可能会去掉一些相关的文档，但是可能增加前几页返回给用户的相关文档数。</strong></p>
+<h4 id="提升召回率的方法"><a href="#提升召回率的方法" class="headerlink" title="提升召回率的方法"></a>提升召回率的方法</h4><ul>
+<li>不需要完全匹配，返回更多的文档</li>
+<li>对查询扩展近义词。因为用户可能输错。</li>
+</ul>
+<h3 id="相关反馈"><a href="#相关反馈" class="headerlink" title="相关反馈"></a>相关反馈</h3><p>定义： 用户提交一个查询，之后搜索引擎返回一些文档，然后用户从中选一些正确的，其余的都视为不正确的。之后根据做对的信息再进行一次搜索。理论上来说，用户提供了更多的信息，我们可以返回更多很好的结果。</p>
+<h3 id="质心"><a href="#质心" class="headerlink" title="质心"></a>质心</h3><p>质心指的是一系列点的中心。计算公式很简单，就是求平均就好了。</p>
+<script type="math/tex; mode=display">
+\mu^\rightarrow (D)= \frac 1 {|D|}\sum_{d \in D} v^\rightarrow(d)</script><p>其中$D$是一个集合。</p>
+<h3 id="Rocchio算法"><a href="#Rocchio算法" class="headerlink" title="Rocchio算法"></a>Rocchio算法</h3><p>Rocchio算法是向量空间模型中常见的相关反馈的实现方式。其每次选择使下式成立的最大查询$q^\rightarrow _{opt}$。</p>
+<script type="math/tex; mode=display">
+q^\rightarrow _{opt}=argmax_{q^\rightarrow}[sim(q^\rightarrow,\mu(D_r))-sim(q^\rightarrow,\mu(D_{nr}))]</script><p>上面的想法是找到一个向量使得相关的和不相关的文档分的最开。</p>
+<p><strong>值得注意的是，我们通过加入一些其他的假设，我们可以吧上面的式子改写为</strong>：</p>
+<script type="math/tex; mode=display">
+q^\rightarrow _{opt}=\mu(D_r)+[\mu(D_r)-\mu(D_{nr}]</script><p>那这个的时间复杂度就很低了，简直不能在快！<strong>即将相关文档的质心移动一个量，该量为相关文档质心和不相关文档的差异量</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesxd5x5j313l0u0775.jpg" alt="image-20190707223729758"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4sest381yj30w90u0acd.jpg" alt="image-20190707223745101"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4sesuiuphj319q0u0tg8.jpg" alt="image-20190707223914504"></p>
+<ul>
+<li>一旦计算出现负权重，那么将负权重都置为0</li>
+<li>因为在向量空间中，权值为负值是没有意义的</li>
+<li>正反馈的价值往往大于负反馈</li>
+<li>一般情况下我们对上式中的$\beta $赋予更高的权重，$r$赋予相对较低的权重。比如说0.75和0.25</li>
+<li>甚至很多系统中只允许有正反馈，即$r=0$</li>
+</ul>
+<p><strong>经验来说：</strong>一轮相关反馈的结果往往非常有用，但是两轮的相关反馈的结果提高有限。</p>
+<h3 id="隐式相关反馈"><a href="#隐式相关反馈" class="headerlink" title="隐式相关反馈"></a>隐式相关反馈</h3><ul>
+<li>通过观察用户对<strong>检索结果采取的行为</strong>来给出对检索结果的相关性判定。比如说：点击、眼球轨迹、历史查询、停留、翻页等。</li>
+<li>不一定准确，但是减轻了用户的负担</li>
+<li>是个性化信息检索的主要研究内容。</li>
+</ul>
+<h3 id="查询扩展"><a href="#查询扩展" class="headerlink" title="查询扩展"></a>查询扩展</h3><ul>
+<li>基于相关反馈的查询扩展</li>
+<li>人工字典法维护近义词，同义词什么的</li>
+<li>词向量的方法，等其他启发式的方法</li>
+<li>通常会显著提升召回率</li>
+<li>可能会显著降低正确率</li>
+</ul>
+<h2 id="lecture-10-排序学习"><a href="#lecture-10-排序学习" class="headerlink" title="lecture-10 排序学习"></a>lecture-10 排序学习</h2><ul>
+<li>排序学习就是通过训练机器学习的模型来解决排序的问题</li>
+<li>给定一个查询，搜索引擎会召回一系列的相关文档的。之后使用一个计算方法计算相关度，再根据结果进行排序。</li>
+<li>但是影响相关度的因素很多，我们使用传统的排序方法不太好用了，于是采用机器学习的方法来解决这个问题。</li>
+<li>排序的方法可以粗略的分为两种，一种是基于相关度，一种是根据重要性。</li>
+<li>排序学习的三种类型：单文档方法pointwise，文档对方法pairwise，文档列表方法listwise。</li>
+</ul>
+<h3 id="基于pointwise的排序学习"><a href="#基于pointwise的排序学习" class="headerlink" title="基于pointwise的排序学习"></a>基于pointwise的排序学习</h3><ul>
+<li>pointwise方法是将排序问题转化为分类或者回归问题</li>
+<li>分类问题：可以用query和相关文档的特征，类别结果作为训练样本。训练模型，值为0或者1。</li>
+<li>回归问题：可以用query和相关文档的相关度作为打分来训练模型</li>
+</ul>
+<h3 id="基于pairwise的排序学习"><a href="#基于pairwise的排序学习" class="headerlink" title="基于pairwise的排序学习"></a>基于pairwise的排序学习</h3><ul>
+<li>单文档方法完全从单个文档的分类得分的角度进行计算，但是pairwise会考虑文档之间的顺序。即构造文档对的顺序进行打分</li>
+<li>对于一个查询，构造文档对样本<doc1,doc2>如果学出来的结果是doc1在doc2前面，那么则记为一个正样本。否则为负样本</doc1,doc2></li>
+<li>只有我们通过相对的位置计算+1,-1进行打分</li>
+</ul>
+<p>问题所在</p>
+<ul>
+<li>只考虑了两个相关文档的先后顺序，我们是不是可以再扩展？</li>
+<li>损失函数衡量的准则是两个文档的相关度，和真正的衡量排序效果的指标之间还是存在很大的不同</li>
+<li>用户实际上值关心最前面的查询</li>
+<li>不同的搜索引擎返回的相关文档的数量差距很大，这样的话，如果返回的结果比较多的话，存在优势</li>
+</ul>
+<h3 id="基于Listwise的排序学习"><a href="#基于Listwise的排序学习" class="headerlink" title="基于Listwise的排序学习"></a>基于Listwise的排序学习</h3><ul>
+<li>与前两种方式不同，listwise的方法不再将排序问题视为一个分类或者回归问题</li>
+<li>而是直接使用NDCG这样的指标进行优化。</li>
+</ul>
+<h3 id="应用场景"><a href="#应用场景" class="headerlink" title="应用场景"></a>应用场景</h3><ul>
+<li>搜索引擎结果排序</li>
+<li>协同过滤</li>
+<li>关键词抽取</li>
+<li>需要以搜索引擎排序的结果作为外部知识的NLP问题。</li>
+</ul>
+<h2 id="Lecture-11-基于语言建模的IR模型"><a href="#Lecture-11-基于语言建模的IR模型" class="headerlink" title="Lecture-11 基于语言建模的IR模型"></a>Lecture-11 基于语言建模的IR模型</h2><h3 id="概率检索模型"><a href="#概率检索模型" class="headerlink" title="概率检索模型"></a>概率检索模型</h3><ul>
+<li>概率检索模型是通过概率的方法将查询和文档联系起来</li>
+<li>定义三个随机变量$R,Q,D$，相关度$R=\{0,1\}$，查询$Q=\{q_1,q_2,…\}$，文档$D=\{d_1,d_2,…\}$。于是我们可以通过计算条件概率$P(R=1|Q=q,D=d)$来度量文档和查询的相关度。</li>
+</ul>
+<h3 id="BM25模型"><a href="#BM25模型" class="headerlink" title="BM25模型"></a>BM25模型</h3><ul>
+<li>BM25模型是一个经典的概率模型，其已经在商业搜索引擎的网页排序中得到的广泛的应用。</li>
+<li>基本思想：给定一个用户查询，如果说搜索系统能在搜索结果排序的排序是按照相关度的高低进行排序的话，那么这个搜索系统的准确度是最优的。</li>
+</ul>
+<p>实现方式：</p>
+<ul>
+<li>根据用户的查询将文档集合划分为两个集合：相关文档子集与不相关文档子集。</li>
+<li>将相关性衡量转换为分类问题，对于某个文档$D$来说，如果其属于相关文档子集的概率大于属于不相关文档的概率，就认为它和查询相关。</li>
+</ul>
+<h3 id="Logistic回归IR模型"><a href="#Logistic回归IR模型" class="headerlink" title="Logistic回归IR模型"></a>Logistic回归IR模型</h3><ul>
+<li><p>基本思想，为了求$Q$和$D$相关的概率$P(R=1|Q,D)$，通过定义多个特征函数$f_i(Q&lt;D)$。我们可以认为$P(R=1|Q,D)$是这些特征函数的组合。</p>
+</li>
+<li><p>定义$\log (P/(1-P))$为多个特征函数的线性组合。则$P$是一个Logistic函数，有：</p>
+</li>
+<li><script type="math/tex; mode=display">
+\begin{eqnarray}
+\log \frac P {1-P}&&=&&\beta_0 + \sum_i\beta_if_i(Q,D)\\
+P&&=&&\frac 1 {1+e^{-\beta_0-\sum_i\beta_if_i(Q,D)}}
+\end{eqnarray}</script></li>
+</ul>
+<h3 id="二值独立模型-BIM"><a href="#二值独立模型-BIM" class="headerlink" title="二值独立模型$BIM$"></a>二值独立模型$BIM$</h3><p>二值独立模型通过贝叶斯公式对所求条件概率$P(R=1|Q,D)$展开进行计算</p>
+<p>概率的观点：</p>
+<ul>
+<li>词项满足某个总体分布，然后从该总体分布中抽样，将抽样出的词项连在一起，组成文档。</li>
+<li>对于$P(D|R=1)$或者$P(D|R=0)$，可以认为$R=1$或$0$的文档的词项满足某个总体的分布，之后再抽样生存$D$。</li>
+</ul>
+<p>于是我们有下面的公式</p>
+<script type="math/tex; mode=display">
+\log \frac {P(R=1|D)} {p(R=0|D)}= \log \frac {P(D|R=1)P(R=1)/P(D)} {p(D|R=0)P(R=0)/P(D)}</script><p>等价于</p>
+<script type="math/tex; mode=display">
+\log \frac {P(D|R=1)} {P(D|R=0)}</script><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4set0voh8j31960tujxc.jpg" alt="image-20190708111548875"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4sestmyltj318p0u048g.jpg" alt="image-20190708111827929"></p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4set11f2ej312s0u0tft.jpg" alt="image-20190708111932763"></p>
+<p>但是在实际中，我们没办法对每个查询都事先得到相关文档和不相关文档，所以无法使用理想情况下的公式进行计算，因此我们必须进行估计。</p>
+<p>估计的方法主要有两种</p>
+<ul>
+<li>初始检索：第一次检索之前的估计</li>
+<li>基于检索结果：根据上次检索的结果进行估计</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4sesvg6a0j31890u0q99.jpg" alt="image-20190708112344095"></p>
+<p>问题是idf值也不是这样计算的啊？？？</p>
+<h3 id="OkapiBM25：一个非二值模型"><a href="#OkapiBM25：一个非二值模型" class="headerlink" title="OkapiBM25：一个非二值模型"></a>OkapiBM25：一个非二值模型</h3><p>计算公式：</p>
+<script type="math/tex; mode=display">
+W_{i}^{I D F}=\log \frac{N-n_{i}+0.5}{n_{i}+0.5}</script><script type="math/tex; mode=display">
+RSV(Q,D)=\sum_{t_i \in D \and Q} W_i^{IDF}\cdot\frac {(k_1+1)tf_{ti,D}} {k_1((1-b)+b\cdot(L_D/L_{ave}))+tf_{ti,D}}\cdot \frac {(k_3+1)tf_{ti,Q}} {k_3+tf_{ti,Q}}</script><h3 id="统计语言模型SLM"><a href="#统计语言模型SLM" class="headerlink" title="统计语言模型SLM"></a>统计语言模型SLM</h3><p>SLM广泛使用于语音识别和统计机器学习领域，利用概率统计理论研究语言。</p>
+<p>对于一个文档片段$d=w_1w_2w_3…w_n$，统计语言模型是指概率$P(w_1w_2…w_n)$求解，根据贝叶斯公式，我们有：</p>
+<script type="math/tex; mode=display">
+P(w_1w_2...w_n)=P(w_1)P(w_2...w_n|w_1)=P(w_1)\prod_{i=2}^n P(w_i|w_{i-1}...w_1)</script><p>根据这个思想发展出来了，一元、二元、三元模型，分别称为$unigram、bigram、trigram$。</p>
+<p>SLM参数的估计很简单，直接使用最大似然估计MLE的方法对模型的参数进行估计就好了。理论上说，在数据充足的情况下，利用更多的前面的信息更正确，但是参数增长的量级实在是太大了。同时会过于稀疏。</p>
+<h3 id="最大似然估计"><a href="#最大似然估计" class="headerlink" title="最大似然估计"></a>最大似然估计</h3><p>最大似然估计的核心思想是：找到参数$\theta$的一个估计值，使得当前样本出现的可能性最大。</p>
+<p><strong>似然</strong>和<strong>概率</strong>的区别：</p>
+<ul>
+<li>概率是在特定环境下某件事发生的可能性，例如抛硬币</li>
+<li>似然是在确定的结果下去推测产生这个结果的可能环境（参数）</li>
+</ul>
+<p>举个例子，如果抛10个硬币，实验结果(反正正正正反正正正反)的似然函数是多少呢?最大似然估计认为正面向上的概率是0.7。一些人可能会说，硬币一般都是均匀的啊，就算正面向上7次我也不信。这里就包含了贝叶斯学派的思想了——要考虑先验概 率。 为此，引入了最大后验概率估计。</p>
+<h3 id="平滑策略"><a href="#平滑策略" class="headerlink" title="平滑策略"></a>平滑策略</h3><ul>
+<li>加法平滑，思想是将$n$元对的出现次数加上一个常数$\delta（0&lt;delta&lt;=1）$。</li>
+</ul>
+<script type="math/tex; mode=display">
+P\left(W_{i} | W_{i-n+1}, \ldots, W_{i-1}\right)=\left(C\left(W_{i-n+1}, \ldots, W_{i-1}, W_{i}\right)+\delta\right) /\left(C\left(W_{i-n+1}, \ldots, W_{i-1}\right)+N \delta\right)</script><ul>
+<li>线性插值平滑，思想是利用低元的n-gram模型对高元的n-gram模型进行线性插值。<script type="math/tex; mode=display">
+\begin{array}{c}{P_{\text {interp}}\left(W_{i} | W_{i-n+1}, \ldots, W_{i-1}\right)=} \\ {\lambda_{n} \cdot P_{M L E}\left(W_{i} | W_{i-n+1}, \ldots, W_{i-1}\right)+\left(1-\lambda_{n}\right) \cdot P_{\text {interp}}\left(W_{i} | W_{i-n+2}, \ldots, W_{i-1}\right)}\end{array}</script></li>
+</ul>
+<h3 id="基于语言模型的IR"><a href="#基于语言模型的IR" class="headerlink" title="基于语言模型的IR"></a>基于语言模型的IR</h3><p>基本思想区别于其他的大多数的检索模型，是从查询到文档的（即给定用户查询，如何找出相关的文档），语言模型是从<strong>文档到查询的</strong>，即为每个文档建立<strong>不同的语言模型，比如说n-gram的矩阵都不一样</strong>，判断文档对应的语言模型是用户需要的结果的可能性有多大，之后按照概率从高到低进行排序，作为搜索的结果。</p>
+<p>下面是几种变种</p>
+<ul>
+<li>查询似然模型QLM：把相关度看成是每篇文档对应的语言下生成该查询的可能性</li>
+<li>翻译模型：假设查询经过某个噪声信道变形成某篇文章，则由文章还原成该查询的概率</li>
+<li>KL距离模型：查询对应某种语言，每篇文档对应某种语言，查询语言和文档的语言的KL距离作为相关度度量</li>
+</ul>
+<h3 id="文本生成的计算模型"><a href="#文本生成的计算模型" class="headerlink" title="文本生成的计算模型"></a>文本生成的计算模型</h3><p>有两种文本生成的模型：</p>
+<ul>
+<li>多元贝努利模型，在概率模型BIM中使用。$D$是抛$L$个（词项的词典的大小）不同的硬币生成的，每个硬币对应一个词项，统计所有的向上和向下的词项便生成文本$D$。参数就是每个硬币朝上的概率，有$L$个。抛的次数不定。</li>
+<li>多项式模型：$D$是抛1个$L$面的硬币$|D|$次生成的，将每次朝上的那面对应的词项集合起来就生成了文本$D$。</li>
+</ul>
+<p>事实证明多项式模型会优于多元贝努利模型。</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4set1iobyj31ao0rmtf5.jpg" alt="image-20190708132751615"></p>
+<h2 id="Lecture-12-朴素贝叶斯分类器"><a href="#Lecture-12-朴素贝叶斯分类器" class="headerlink" title="Lecture-12 朴素贝叶斯分类器"></a>Lecture-12 朴素贝叶斯分类器</h2><p>机器学习分为三种</p>
+<ul>
+<li>有监督学习，从给定的有标注的训练数据集中学习出一个函数(模型参数)，当新的数据到来时可以根据这个函数预测结果。 常见任务包括分类与回归。</li>
+<li>无监督学习，没有标注的训练数据集，需要根据样本间的统计规律对样本集进行分析，常见任务如聚类等</li>
+<li>强化学习，外部环境对输出只给出评价信息而非正确答案，学习机通过强化受奖励的动作来改善自身的性能</li>
+</ul>
+<h3 id="朴素贝叶斯"><a href="#朴素贝叶斯" class="headerlink" title="朴素贝叶斯"></a>朴素贝叶斯</h3><ul>
+<li>朴素贝叶斯是一个概率分类器</li>
+<li>文档$d$属于$c$的概率计算如下</li>
+</ul>
+<script type="math/tex; mode=display">
+P(c | d)=P(d | c) P(c) / P(d) \propto P(d | c) P(c)=P(c) \prod_{1 \leq k \leq n_{d}} P\left(t_{k} | c\right)</script><ul>
+<li>其中$n_d$是文档的长度</li>
+<li>$P(t_k,c)$是词项$t_k$出现在类别$c$中文档的概率，即类别$c$文档的一元语言模型</li>
+<li>$P(t_k,c)$度量的是当$c$是正确类别时$t_k$的贡献</li>
+<li>$P(c)$时类别$c$的先验概率</li>
+<li>如果文档的词项无法提供属于哪个类别的信息，那么我们直接选择$P(c)$最高的那个类别。</li>
+</ul>
+<h4 id="具有最大后验概率的类别"><a href="#具有最大后验概率的类别" class="headerlink" title="具有最大后验概率的类别"></a>具有最大后验概率的类别</h4><ul>
+<li><p>朴素贝叶斯分类的目标是寻找”最佳”的类别</p>
+</li>
+<li><p>最佳类别是指具有最大后验概率(MAP)的类别$C_{map}$:</p>
+<script type="math/tex; mode=display">
+c_{\mathrm{map}}=\underset{c \in \mathbb{C}}{\arg \max } \hat{P}(c | d)=\underset{c \in \mathbb{C}}{\arg \max } \hat{P}(c) \prod_{1 \leq k \leq n_{d}} \hat{P}\left(t_{k} | c\right)</script></li>
+<li><p>为了保证精度，我们通常都是取完对数再进行计算。于是上面的公式就变成了</p>
+<script type="math/tex; mode=display">
+c_{\mathrm{map}}=\underset{c \in \mathbb{C}}{\arg \max }\left[\log \hat{P}(c)+\sum_{1 \leq k \leq n_{d}} \log \hat{P}\left(t_{k} | c\right)\right]</script></li>
+</ul>
+<p>我们估计参数的方式，依然使用极大似然估计：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4set1zlksj319x0u0jxq.jpg" alt="image-20190708135403053"></p>
+<h4 id="平滑方式"><a href="#平滑方式" class="headerlink" title="平滑方式"></a>平滑方式</h4><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4set2gd5zj31eo0tk781.jpg" alt="image-20190708135447189"></p>
+<p>朴素贝叶斯实际上采用了两种假设：</p>
+<ul>
+<li>条件独立性假设：</li>
+</ul>
+<script type="math/tex; mode=display">
+P(d | c)=P\left(\left\langle t_{1}, \ldots, t_{n_{d}}\right\rangle | c\right)=\prod_{1 \leq k \leq n_{d}} P\left(X_{k}=t_{k} | c\right)</script><ul>
+<li>位置独立性假设：每个词在每个位置出现的概率一样</li>
+</ul>
+<p>实际上，上面的两个假设在大多数时候都是不成立的，但是即使是这样，朴素贝叶斯方法依然可以高效的工作：</p>
+<h3 id="朴素贝叶斯的两种实现方式"><a href="#朴素贝叶斯的两种实现方式" class="headerlink" title="朴素贝叶斯的两种实现方式"></a>朴素贝叶斯的两种实现方式</h3><h4 id="贝努利模型"><a href="#贝努利模型" class="headerlink" title="贝努利模型"></a>贝努利模型</h4><p>基于贝努利模型的实现方法:贝努利模型不考虑词在文档中出现的次数，只考虑出不出现，因此在这个意义上相当于假设词是等权重的。贝努利模型是一种以文档作为计算粒度的方法</p>
+<ul>
+<li>每个类对应一堆硬币</li>
+<li>每个硬币代表一个词</li>
+<li><strong>硬币的个数等于单词的个数，不考虑词频</strong></li>
+<li>类中的一篇文本是通过投掷对应类的所有硬币产生的。</li>
+<li>词袋模型</li>
+</ul>
+<script type="math/tex; mode=display">
+P(c | d)=P(d | c) P(c) / P(d) \propto P(d | c) P(c)=P(c) \prod_{t \in d} P(t | c) \prod_{t \in d}(1-P(t | c))</script><script type="math/tex; mode=display">
+\hat{P}(c)=\frac{N_{c}}{N} \qquad \hat{P}(t | c)=\frac{N_{c t}+1}{N_{c}+2}</script><h4 id="多项式模型"><a href="#多项式模型" class="headerlink" title="多项式模型"></a>多项式模型</h4><p>基于多项式模型的实现方法:多项式模型中各单词类条件概率计算考虑了词出现的次数，多项式模型是一种以词作为计算粒度的方法。前面讨论的就是这种方法。</p>
+<ul>
+<li><p>每个不规则骰子表示一个类</p>
+</li>
+<li><p>骰子的每个面表示一个词</p>
+</li>
+<li><p><strong>面的个数表示文本中单词的个数</strong></p>
+</li>
+<li><p>每个类的一篇文本是通过上述的骰子产生的</p>
+<script type="math/tex; mode=display">
+P(c | d)=P(d | c) P(c) / P(d) \propto P(d | c) P(c)=P(c) \prod_{1 \leq k \leq n_{d}} P\left(t_{k} | c\right)</script><script type="math/tex; mode=display">
+\hat{P}(c)=\frac{N_{c}}{N} \qquad \hat{P}(t | c)=\frac{T_{c t}+1}{\sum_{t^{\prime} \in V}\left(T_{c t^{\prime}}+1\right)}=\frac{T_{c t}+1}{\left(\sum_{t^{\prime} \in V} T_{c t^{\prime}}\right)+B}</script></li>
+</ul>
+<h2 id="lecture-13-基于向量空间的分类器"><a href="#lecture-13-基于向量空间的分类器" class="headerlink" title="lecture-13 基于向量空间的分类器"></a>lecture-13 基于向量空间的分类器</h2><h3 id="特征降维的种类"><a href="#特征降维的种类" class="headerlink" title="特征降维的种类"></a>特征降维的种类</h3><p>分为特征抽取和特征选择。</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4sf2gl87gj317h0u045a.jpg" alt="image-20190708143037558"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqy4i8jj31eq0q8aee.jpg" alt="image-20190708155734028"></p>
+<h3 id="PCA方法"><a href="#PCA方法" class="headerlink" title="PCA方法"></a>PCA方法</h3><p>PCA的思想就是寻找数据分布的最优的子空间，将$n$维特征映射到$k$维新特征上，其中新特征是旧特征的线性组合形式。取协方差矩阵前$s$个最大的特征值对应的特征向量构成映射矩阵，之后对数据进行降维。</p>
+<p>PCA其实是一个基的变换，使得变换后的数据有最大的方差，方差的大小说明的信息熵的大小，如果一个模型的方差比较大，那就说明模型不够稳定了。但是对于使用急求恶习的数据来说，方差大才有意义，要不然输入没什么区别，难以学习到好的特征。</p>
+<h3 id="LDA-线性判别分析"><a href="#LDA-线性判别分析" class="headerlink" title="LDA-线性判别分析"></a>LDA-线性判别分析</h3><p>思想：寻找可分性判据最大的子空间。使用了Fisher准则，每次寻找一个向量，使得降维后类内散度最小，类间散度最大。这样的话就是就是取$S$个特征值对应的特征向量构成映射矩阵，之后对数据进行一些处理。</p>
+<h4 id="PCA和LDA区别："><a href="#PCA和LDA区别：" class="headerlink" title="PCA和LDA区别："></a>PCA和LDA区别：</h4><p>LDA是一种监督学习的降维技术，也就是说它的数据集的每个样本是有类别输出的。PCA是不考虑样本类别输出的无监督降维技术。</p>
+<p>PCA是为了去除原始数据集中冗余的维度，让投 影子空间的各个维度的方差尽可能大，也就是熵尽可能大。 </p>
+<h3 id="特征选择所考虑的因素"><a href="#特征选择所考虑的因素" class="headerlink" title="特征选择所考虑的因素"></a>特征选择所考虑的因素</h3><ul>
+<li>类内代表性</li>
+<li>类间区别性</li>
+<li>特征子集 的最优性</li>
+</ul>
+<h3 id="Rocchio方法"><a href="#Rocchio方法" class="headerlink" title="Rocchio方法"></a>Rocchio方法</h3><h4 id="相关反馈-1"><a href="#相关反馈-1" class="headerlink" title="相关反馈"></a>相关反馈</h4><ul>
+<li>用户对于先反馈的查询进行一些标记</li>
+<li>在根据用户的选择返回更加精准的结果</li>
+<li>相关反馈可以看成一种文本分类的形式</li>
+</ul>
+<p>相关反馈和文本分类的区别在于：</p>
+<ul>
+<li>文本分类中，训练集是作为输入的一部分事先给定的</li>
+<li>相关反馈中，训练集是用户操作得到的</li>
+</ul>
+<p>在很多的情况下，Rocchio的效果不如朴素贝叶斯。原因是Rocchio算法不能处理非凸、多模式类别的分类。</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqs1vpvj318l0u00zb.jpg" alt="image-20190708230543508"></p>
+<h3 id="kNN分类器K-nearest-neighbors"><a href="#kNN分类器K-nearest-neighbors" class="headerlink" title="kNN分类器K nearest neighbors"></a>kNN分类器K nearest neighbors</h3><ul>
+<li>在大多数情况下，kNN的效果比朴素贝叶斯和Rocchio要好一些</li>
+<li>如果不是很关注效率的话，kNN是一个很好的选择</li>
+<li>同时要求高精度</li>
+<li>k=1的话，也被叫做最近邻：将每篇测试文档分给训练集中离它最近的那篇文档所属的类别</li>
+<li>1NN不是很鲁棒，因为很有可能会分错或者原本该点就有问题</li>
+<li>k&gt;1的话，将每篇测试文档分到训练集中离它最近的$k$篇文档所属类别中最多的那个类别</li>
+<li>kNN的基本原理：邻近性假设，我们期望一篇测试文档$d$和训练集中$d$周围的领域文档的类别的标签一致。</li>
+</ul>
+<h3 id="概率型kNN"><a href="#概率型kNN" class="headerlink" title="概率型kNN"></a>概率型kNN</h3><p>kNN的概率型版本：$P(c|d)=d$的最近的$k$个邻居中属于$c$类的比例</p>
+<p>概率型kNN:将$d$分到具有最高概率$P(c|d)$的类别$c$中</p>
+<h3 id="kNN的时间复杂度"><a href="#kNN的时间复杂度" class="headerlink" title="kNN的时间复杂度"></a>kNN的时间复杂度</h3><ul>
+<li>kNN测试时间复杂度与训练集的大小成正比</li>
+<li>训练集越大，对测试文档的分类时间越长</li>
+<li>在大训练集的情况下，kNN的效率较低</li>
+<li>在训练集非常大的时候，kNN的分类精度很高</li>
+<li>如果训练集很小的话，kNN效果可能会很差</li>
+</ul>
+<h2 id="Lecture-14-支持向量机及排序机器学习"><a href="#Lecture-14-支持向量机及排序机器学习" class="headerlink" title="Lecture-14 支持向量机及排序机器学习"></a>Lecture-14 支持向量机及排序机器学习</h2><h3 id="SVM"><a href="#SVM" class="headerlink" title="SVM"></a>SVM</h3><p>首先介绍了一下svm的具体形式</p>
+<h3 id="基于布尔权重的学习"><a href="#基于布尔权重的学习" class="headerlink" title="基于布尔权重的学习"></a>基于布尔权重的学习</h3><p>基本思路：</p>
+<p>词项权重(tf-idf)的目标是为了度量词项的重要性，将一篇文档对于所有查询词项的权重加起来便可以计算文档和查询的相关度，基于该相关度可以对所有的文档进行排序。</p>
+<p>上面的过程可以想象成一个文本分类的问题，词项的权重可以通过训练集中学习到。这种方式被称为<strong>机器学习的相关度</strong>或者是<strong>排序学习</strong></p>
+<h4 id="权重学习"><a href="#权重学习" class="headerlink" title="权重学习"></a>权重学习</h4><p>主要方法：给定训练样例的集合，每个样例表示为三元组$(q,d,R(d,q))$。最简单的情况，$R(d,q)$不是1就是0。从这种样例中学习权重，使得学到的评分接近训练集中的相关性判定结果。</p>
+<h4 id="域加权评分"><a href="#域加权评分" class="headerlink" title="域加权评分"></a>域加权评分</h4><ul>
+<li>给定查询以及3个域(author,title,body)的文档集合</li>
+<li>域加权评分对每个域都有独立的权重，比如说$g_1,g_2,g_3$</li>
+<li>但是不是所有的域饿重要性都一样</li>
+<li>所以$g_1,g_2,g_3$值会不同，我们可以学习这些值。比如说分别为0.2,0.3,0.5，其总系数为1。这样我们可以学习到一个0-1的打分</li>
+<li>如果查询词项出现在某个域中，那么该域的得分为1，否则为0.</li>
+</ul>
+<p>例子：查询词仅仅在title和body中出现，于是文档得分为$0.2\cdot0+0.3\cdot1+0.5\cdot1=0.8$</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twr2f65xj31d20u0wkb.jpg" alt="image-20190709000930192"></p>
+<p>之后我们可以根据训练数据的标签得到损失，之后我们最小化损失，就可以训练模型了。</p>
+<h3 id="基于实数权重的学习"><a href="#基于实数权重的学习" class="headerlink" title="基于实数权重的学习"></a>基于实数权重的学习</h3><p>我们可以对<strong>文章和查询</strong>提一些特征出来，之后学习这些特征的权重，具体来说，我们有：</p>
+<script type="math/tex; mode=display">
+Score(d,q)=Score(\alpha,\omega)=a\alpha+b\omega+c</script><p>我们可以学习$a,b,c$。这样的话我们就可以用SVM了。</p>
+<p>这样的话，对文章进行打分就变成了一个学习问题。</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twquxybgj318q0u07h4.jpg" alt="image-20190709002042458"></p>
+<h3 id="将IR排序问题看成一个序回归问题"><a href="#将IR排序问题看成一个序回归问题" class="headerlink" title="将IR排序问题看成一个序回归问题"></a>将IR排序问题看成一个序回归问题</h3><ul>
+<li>对于同一个查询，文档之间只需要按照相对得分进行排序就好了，不需要计算所有的文档</li>
+<li>所以我们只需要进行一个排序就好了</li>
+</ul>
+<p><strong>利用结构化SVM框架可以处理IR排序问题，对于一个查询，预测的类别是结果的排序</strong></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr4wxquj31co0q6n3f.jpg" alt="image-20190709002837625"></p>
+<p>不过现在还是很依赖与人工特征工程的方法。</p>
+<h2 id="lecture-15-扁平聚类"><a href="#lecture-15-扁平聚类" class="headerlink" title="lecture-15 扁平聚类"></a>lecture-15 扁平聚类</h2><p>聚类的要求：</p>
+<ul>
+<li>一般目标：将相关文档放到一个簇当中，将不相关文档放到不同簇当中</li>
+<li>簇的数目应该合适，以便和当前聚类的数据集吻合</li>
+<li>避免非常大和非常小的簇</li>
+</ul>
+<h3 id="扁平聚类VS层次聚类"><a href="#扁平聚类VS层次聚类" class="headerlink" title="扁平聚类VS层次聚类"></a>扁平聚类VS层次聚类</h3><ul>
+<li>扁平算法<ul>
+<li>通过一开始将全部文档或者部分文档随机划分为不同的组</li>
+<li>通过迭代方法不断修正</li>
+<li>代表算法：k-means</li>
+</ul>
+</li>
+<li>层次聚类<ul>
+<li>构建具有层次结构的簇</li>
+<li>自底向上的算法称为凝聚式算法</li>
+<li>自顶向下的算法称为分裂式算法</li>
+</ul>
+</li>
+</ul>
+<h3 id="硬聚类VS软聚类"><a href="#硬聚类VS软聚类" class="headerlink" title="硬聚类VS软聚类"></a>硬聚类VS软聚类</h3><p>硬聚类：每篇文档仅仅属于一个簇。很普通而且实现简单。</p>
+<p>软聚类：一篇文档可以属于多个簇，对于目录之类的应用来说很有意义。比如说将鞋子划分成体育用品、鞋类两个簇里</p>
+<h3 id="扁平算法"><a href="#扁平算法" class="headerlink" title="扁平算法"></a>扁平算法</h3><ul>
+<li>将$N$篇文档划分为$k$个簇</li>
+<li>给定一个文档集合和聚类结果簇的个数$K$</li>
+<li>寻找一个划分准则，使得$k$个簇的结果满足最优划分准则</li>
+<li>全局优化：穷举所有的划分结果，从中选择最优的那个划分结果</li>
+<li>高效的启发式方法：$k-means$聚类算法</li>
+</ul>
+<h3 id="K-means聚类算法"><a href="#K-means聚类算法" class="headerlink" title="K-means聚类算法"></a>K-means聚类算法</h3><p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr0wuztj31840ps79e.jpg" alt="image-20190709105129042"></p>
+<h4 id="停止准则"><a href="#停止准则" class="headerlink" title="停止准则"></a>停止准则</h4><ul>
+<li>k-means聚类算法的停止准则可以采用以下两种方式</li>
+<li>固定一个迭代次数之后停止，这个迭代轮数十分影响最后的结果。</li>
+<li>文档到簇的分配结果不再改变之后停止。</li>
+<li>质心向量$\mu_k$的结果不再改变。这等价于文档到簇的分配结果不再改变。</li>
+</ul>
+<h4 id="目标函数"><a href="#目标函数" class="headerlink" title="目标函数"></a>目标函数</h4><p>衡量质心对簇中文档的代表程度RSS(Residual Sum of Squares,残差平方和,失真率)</p>
+<script type="math/tex; mode=display">
+\mathrm{RSS}=\sum_{k=1}^{K} \mathrm{RSS}_{k}</script><script type="math/tex; mode=display">
+\mathrm{RSS}_{k}=\sum_{x \in \omega_{k}}\left|\vec{x}-\vec{\mu}\left(\omega_{k}\right)\right|^{2}</script><p>这个就是k-means的目标函数，我们的目的是要让这个函数取最小值。同时由于$N$是固定的，最小化RSS相当于最小化平方距离。</p>
+<p>由于每次k-means的迭代都会减小损失函数，所以k-means一定是一个收敛的算法，只是我们不知道达到收敛的时间。通常情况下，收敛的速度很快，10-20次就可以得到一个相对不错的结果，但是完全的收敛需要更多的迭代。</p>
+<p>但是k-means的结果和初始的种子相关性很大，等于说就算我们的k-means算法以及不能再迭代了，但是这也不见得是全局的最优解，<strong>这是该算法的最大的缺点</strong>，换句话说，k-means算法得到的结果不是全局的最优解，而是接近最优解的结果。</p>
+<h3 id="种子的初始化选择"><a href="#种子的初始化选择" class="headerlink" title="种子的初始化选择"></a>种子的初始化选择</h3><ul>
+<li>种子的随机选择只是k-means算法的最简单方法之一。但是该方法很不鲁棒，可能会获得一个次优的聚类结果</li>
+<li>一些确定初始质心向量的更好的办法<ul>
+<li>非随机的采用某些启发式的方法选择种子。（过滤掉边缘的离群点，寻找有较好的文档空间覆盖度的种子集合）</li>
+<li>采用层级聚类算法寻找更好的种子</li>
+<li>选择$i$次不同的随机种子集合，对每次产生的随机种子集合运行k-means算法，之后选择rss最小的那个划分结果</li>
+<li>先进行一次k-means，为每个簇选出$i$个随机向量。之后将它们的质心向量作为新的种子。</li>
+</ul>
+</li>
+</ul>
+<h4 id="聚类结果的评价"><a href="#聚类结果的评价" class="headerlink" title="聚类结果的评价"></a>聚类结果的评价</h4><h4 id="纯度"><a href="#纯度" class="headerlink" title="纯度"></a>纯度</h4><p>我们使用纯度来衡量聚类结果的好坏，</p>
+<script type="math/tex; mode=display">
+\text { purity }(\Omega, C)=\frac{1}{N} \sum_{k} \max _{j}\left|\omega_{k} \cap c_{j}\right|</script><p>其中$\Omega=\{\omega_1..,\omega_K\}$是簇的集合，$C=\{c_1…,c_J\}$是类别的集合。对于每个簇$\omega_k$：找到一个类别$c_j$。如果这个类别包含$\omega_k$中的元素最多，为$n_{kj}$个。那么也就是说$\omega_k$的远足最多分布在$c_j$中。于是我们对每个簇$\omega_k$都去找包含最多其元素的$c_j$。之后把每个$k$对应的最大的$n_{kj}$相加就好了。</p>
+<p>为了得到[0,1]之间的值，我们使用加和后的结果除以总的文档数$N$就能得到纯度了。</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqvd82zj310n0u0dj7.jpg" alt="image-20190709113430524"></p>
+<h4 id="兰迪指数-Rand-Index"><a href="#兰迪指数-Rand-Index" class="headerlink" title="兰迪指数(Rand Index)"></a>兰迪指数(Rand Index)</h4><p>定义：</p>
+<script type="math/tex; mode=display">
+\mathrm{RI}=\frac{\mathrm{TP}+\mathrm{TN}}{\mathrm{TP}+\mathrm{FP}+\mathrm{FN}+\mathrm{TN}}</script><p>我们主要是定义文档之间的关系，得到一个$2\cdot2$的列联表，也就是聚类得到的结果和实际类别所对应的值：</p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqsqdmbj31860u0107.jpg" alt="image-20190709114446856"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqqbsbxj318k0rm78h.jpg" alt="image-20190709114905975"></p>
+<p>计算方式</p>
+<p>首先我们知道有N篇文档，那么总共的组合为$C_n^2$，上面的例子$n=17$，于是有总组合数为$C_n^2=136$。</p>
+<p>根据得到的聚类结果，分别为$6,6,5$个，于是总组合数为$C_6^2+C_6^2+C_5^2=40$</p>
+<p>我们计算TP值（也就是同簇同类中有多少对），可以得到结果为$C_5^2+C_4^2+C_3^2+C_2^2=20$</p>
+<p>于是FP值就是40-20=20</p>
+<p>之后我们可以得到FN+TN=136-40=96。</p>
+<p>我们再计算FN值，（也就是同类不同簇的对数）</p>
+<ul>
+<li>对于x，我们有$5\cdot 1 +5\cdot 2+1\cdot 2=17$</li>
+<li>对于o，我们有$1\cdot 4=4$</li>
+<li>对于菱形，我们有$1\cdot 3=3$</li>
+</ul>
+<p>相加我们得到FN值为24.</p>
+<p>于是TN=96-24=72。</p>
+<p>于是我们同上面的式子</p>
+<script type="math/tex; mode=display">
+\mathrm{RI}=\frac{\mathrm{TP}+\mathrm{TN}}{\mathrm{TP}+\mathrm{FP}+\mathrm{FN}+\mathrm{TN}}</script><p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqziqbuj317w0no767.jpg" alt="image-20190709122924066"></p>
+<h3 id="簇的个数的确定"><a href="#簇的个数的确定" class="headerlink" title="簇的个数的确定"></a>簇的个数的确定</h3><p>在很多的应用中，簇的个数$k$是实现给定的。但是如果没有外部的限制的话，我们应该怎么去确定正确的个数呢？可不可以找一个优化的准则呢？</p>
+<h4 id="基本想法"><a href="#基本想法" class="headerlink" title="基本想法"></a>基本想法</h4><ul>
+<li>从一个簇开始</li>
+<li>不断的增加簇</li>
+<li>对每一个新的簇增加一个惩罚项</li>
+</ul>
+<p>在惩罚项和RSS之间进行折中。</p>
+<p>之后我们选择满足折中条件的最佳的$K$就好了</p>
+<p>实现的时候，我们可以设置一个$\lambda$ ，表示对每一个簇的惩罚。</p>
+<p>之后我们希望下面的目标函数最小</p>
+<script type="math/tex; mode=display">
+RSS+K\lambda</script><h2 id="Lecture-16-层次聚类"><a href="#Lecture-16-层次聚类" class="headerlink" title="Lecture-16 层次聚类"></a>Lecture-16 层次聚类</h2><h3 id="层次凝聚式聚类-HAC"><a href="#层次凝聚式聚类-HAC" class="headerlink" title="层次凝聚式聚类(HAC)"></a>层次凝聚式聚类(HAC)</h3><ul>
+<li>HAC会生成一颗二叉树形式的类别层次的结构</li>
+<li>到目前为止，我们之前的相似度都是定义在文档之间的，现在使用层次聚类的话，我们要定义在簇之间的相似度</li>
+<li>这种方式，是最开始每篇文档都是一个独立的簇</li>
+<li>之后每次将最相似的两个簇进行合并</li>
+<li>直到最后只剩下一个簇</li>
+<li>合并的历史就是一棵二叉树</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqt4178j314y0peafq.jpg" alt="image-20190709124759240"></p>
+<h3 id="分裂式聚类"><a href="#分裂式聚类" class="headerlink" title="分裂式聚类"></a>分裂式聚类</h3><ul>
+<li>分裂式聚类是从顶往下</li>
+<li>一开始所有的文档都属于一个类</li>
+<li>之后不断的迭代进行分割</li>
+<li>最后，每个节点都是一个类</li>
+</ul>
+<h3 id="信息检索里面的关键的问题"><a href="#信息检索里面的关键的问题" class="headerlink" title="信息检索里面的关键的问题"></a>信息检索里面的关键的问题</h3><p>我们如何定义簇的相似度？</p>
+<ul>
+<li>单链接：最大的相似度，计算簇间任意两篇文档之间的相似度，取其中的最大值</li>
+<li>全链接：最小的相似度，计算间簇任意两篇文档之间的相似度，取其中的最小值</li>
+<li>质心法：平均类间的相似度，首先对每个簇维护一个质心，之后计算质心的相似度，或者计算不同簇之间的相似度取平均值。</li>
+<li>组平均（GAAC）：把两个簇视为一个整体，之后把这个整体中的任意两个都计算相似度，最后计算总的相似度的平均值。</li>
+</ul>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twr026e8j311y0tajt0.jpg" alt="image-20190709130134186"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twr0gxf1j30v40tgdhc.jpg" alt="image-20190709130144398"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqwa96ej30zi0riq4v.jpg" alt="image-20190709130155056"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr3sagej30u80sojtb.jpg" alt="image-20190709130204350"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twr1x7m4j318i0oywhx.jpg" alt="image-20190709144242231"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twr1hgiwj318y0s8n2j.jpg" alt="image-20190709144300318"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqu0hyzj314s0pijuc.jpg" alt="image-20190709144830352"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqtinbxj31860u0n1w.jpg" alt="image-20190709144345195"></p>
+<p><img src="http://ww4.sinaimg.cn/large/006tNc79ly1g4twqqwkplj31960mgn1z.jpg" alt="image-20190709144416500"></p>
+<ul>
+<li>由于存在相似度颠倒，我们一般不使用质心法</li>
+<li>由于GAAC不会受限于链化，并且对离群点也不敏感，所以在大部分情况下，GAAC都是最佳的选择</li>
+<li>但是，GAAC只能基于向量的表示来计算</li>
+</ul>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twr2xbjtj319k0ns79o.jpg" alt="image-20190709144929171"></p>
+<h3 id="二分k均值：一个自顶向下的算法"><a href="#二分k均值：一个自顶向下的算法" class="headerlink" title="二分k均值：一个自顶向下的算法"></a>二分k均值：一个自顶向下的算法</h3><ul>
+<li>一开始所有的文档都在一个簇中</li>
+<li>之后使用k均值算法将簇分裂成两个簇</li>
+<li>之后在产生的所有簇当中，选择一个进行分裂操作</li>
+<li>重复上述操作直到达到期望的簇的数目</li>
+</ul>
+<h3 id="簇的标签生成"><a href="#簇的标签生成" class="headerlink" title="簇的标签生成"></a>簇的标签生成</h3><ul>
+<li>聚类算法结束之后，我们会输出一些簇</li>
+<li>但是簇的标签应该怎么输出比较好呢？</li>
+</ul>
+<h4 id="差别式簇标签生成方法"><a href="#差别式簇标签生成方法" class="headerlink" title="差别式簇标签生成方法"></a>差别式簇标签生成方法</h4><ul>
+<li>为了对簇$\omega $生成标签，将$\omega$和其他簇进行比较</li>
+<li>找到那些将$\omega$和其他簇区别开的词项或者短语</li>
+<li>可以使用互信息，卡方或则词频等其他形式</li>
+</ul>
+<h4 id="非差别式簇标签的生成方法"><a href="#非差别式簇标签的生成方法" class="headerlink" title="非差别式簇标签的生成方法"></a>非差别式簇标签的生成方法</h4><ul>
+<li>只基于簇本身的信息，来选择词项或者短语</li>
+<li>比如说离质心最近的词项</li>
+<li>非差别式方法有时候会选出并能区分簇的高频词项</li>
+</ul>
+<h2 id="Lecture-17-隐性语义索引-LSI"><a href="#Lecture-17-隐性语义索引-LSI" class="headerlink" title="Lecture-17 隐性语义索引-LSI"></a>Lecture-17 隐性语义索引-LSI</h2><p>词项-文档矩阵</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqwqmigj31a60u00zq.jpg" alt="image-20190709151516496"></p>
+<h3 id="lsi简介"><a href="#lsi简介" class="headerlink" title="lsi简介"></a>lsi简介</h3><ul>
+<li>首先我们有文档-词项索引</li>
+<li>我们希望将词项-文档矩阵转换成多个矩阵的乘积的形式</li>
+<li>在这里我们使用一个特定的分解方法：奇异值分解方法，简称为SVD</li>
+<li>SVD：$C=U\Sigma V^T$，其中$C$是词项-文档矩阵。SVD分解具有唯一性（在不考虑正负号的情况下）</li>
+<li>我们希望利用SVD分解的结果来购在一个新的、改进的词项-文档矩阵$C$</li>
+<li>之后通过$C’$我们可以得到一个更好的相似度计算方法（相对于$C$而言）</li>
+<li>为了这种目的而使用SVD被称为隐形语义索引或者隐性语义分析，简称为$LSI,LSA$</li>
+</ul>
+<h3 id="特征分解"><a href="#特征分解" class="headerlink" title="特征分解"></a>特征分解</h3><p>将矩阵分解为一组特征向量和特征值，下面的是一个的形式：</p>
+<script type="math/tex; mode=display">
+Ax=\lambda x</script><p>其中A为n阶矩阵，$\lambda$为A的特征值，x为$\lambda$对应的特征向量。上面表示的是一个特征值的形式。</p>
+<p>假设$A$是一个可相似对角化的阵，则有$n$个线性无关的特征向量$v^1,…,v^n$，对应特征值为$\lambda_1,…,\lambda_n$。于是我们可以写成矩阵的形式：</p>
+<script type="math/tex; mode=display">
+AV=V diag(\lambda)</script><p>右乘$V$的逆，就得到了$A$的特征分解形式，记作：</p>
+<script type="math/tex; mode=display">
+A=V diag(\lambda)V^{-1}</script><p>当$A$为实对称阵，就可以分解成实特征向量和实特征值：</p>
+<script type="math/tex; mode=display">
+A=Q diag(\lambda) Q^T</script><h4 id="特征分解的含义"><a href="#特征分解的含义" class="headerlink" title="特征分解的含义"></a>特征分解的含义</h4><ul>
+<li>特征值分解可以得到特征值与特征向量，特征值表示的是这个特征到底有多重要，而特征向量表示这个特征是什么。</li>
+<li>我们通过特征值分解得到的前N个特征向量，那么就对应了这个矩阵最主要的N个变化方向。我们利用这前N个变化方向，就可以近似这个矩阵(变换)。也就是提取了这个矩阵最重要的N个特征。</li>
+</ul>
+<p><strong>致命的缺点就是分解时要求是方阵，所以也就衍生出了更加一般的奇异值分解了</strong></p>
+<h3 id="奇异值分解"><a href="#奇异值分解" class="headerlink" title="奇异值分解"></a>奇异值分解</h3><p>假设矩阵$A$的维度是$m\cdot n$。虽然$A$不是方阵，但是下面的两种形式却是方阵，而且是对称的方阵，维度分别为$m\cdot m,n\cdot n$</p>
+<script type="math/tex; mode=display">
+AA^T\quad A^TA</script><p>于是我们分别对上面的方阵进行分解，有：</p>
+<script type="math/tex; mode=display">
+A A^{T}=U \Sigma U^{T} \quad A^{T} A=V \Sigma V^{T}</script><p>那么我们就有$A$的奇异值分解的形式如下：</p>
+<script type="math/tex; mode=display">
+A=U \Sigma V^{T}</script><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqq78t4j30uw09caat.jpg" alt="image-20190709160421483"></p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqvuhqoj31790u0wlp.jpg" alt="image-20190709155857574"></p>
+<p><img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqug3vej31e00ow0y7.jpg" alt="image-20190709155923618"></p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqx6rqpj31d20tc451.jpg" alt="image-20190709155937208"></p>
+<p>于是就有<strong>U表示词项到语义的关系强弱，V表示文档到语义的关系强弱</strong></p>
+<p>于是我们使用LSI可以得到下面的结论</p>
+<ul>
+<li>词项-文档矩阵可以分解成3个矩阵的乘积</li>
+<li>词项矩阵$U$，每个词项对应其中的一个行向量</li>
+<li>文档矩阵$V^T$，每篇文档对应其中的一个列向量</li>
+<li>奇异值矩阵$\Sigma$，对角矩阵，对角线上的奇异值表示的是语义维度的重要性。</li>
+</ul>
+<h3 id="空间降维处理"><a href="#空间降维处理" class="headerlink" title="空间降维处理"></a>空间降维处理</h3><p>实际上，$\Sigma$矩阵是十分稀疏的，因为有些不重要的语义，我们其实可以把那些维度给压缩掉，这样我们一样可以保留下来绝大部分的信息。同时可以去除一些噪音。</p>
+<h3 id="低秩逼近"><a href="#低秩逼近" class="headerlink" title="低秩逼近"></a>低秩逼近</h3><p>在很多情况下，前10%甚至1%的奇异值的和就占了全部奇异值之和的99%以上了。换句话说，我们可以用前$r$大的奇异值来近似描述矩阵，我们可以记作：</p>
+<script type="math/tex; mode=display">
+A_{m \times n} \approx U_{m \times r} \Sigma_{r \times r} V_{r \times n}^{T}</script><p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twr3diuhj30mw0cc3z4.jpg" alt="image-20190709161118393"></p>
+<h3 id="LSI的优点"><a href="#LSI的优点" class="headerlink" title="LSI的优点"></a>LSI的优点</h3><ul>
+<li>LSI能够发现文档的语义上的关联</li>
+<li>LSI最大的优点就是可以通过低秩分解得到语义的相似度</li>
+<li>之后就可以方便的找出同义词，解决一义多词的问题</li>
+<li>如果文档中有大量的同义词，那么LSI是十分有用的</li>
+</ul>
+<h2 id="Lecture-18-web搜索"><a href="#Lecture-18-web搜索" class="headerlink" title="Lecture-18 web搜索"></a>Lecture-18 web搜索</h2><h3 id="重复检测"><a href="#重复检测" class="headerlink" title="重复检测"></a>重复检测</h3><ul>
+<li>web网页上重复的内容极多</li>
+<li>主要存在完全重复和近似重复的两种形式</li>
+</ul>
+<h3 id="近似重复的检"><a href="#近似重复的检" class="headerlink" title="近似重复的检"></a>近似重复的检</h3><ul>
+<li>采用jaccard，编辑距离等指标计算页面之间的相似度。</li>
+<li>在这里，我们只考虑语法上相似的文章。也就是说，我们并不考虑那些内容意义上相似但是表达方式不同的近似重复。等于说我们只考虑完全抄袭的网页，因为很多恶意爬虫会生成这些网页。</li>
+<li>我们使用一个相似度的阈值$\theta $ 来进行判定两个页面是不是相似的。</li>
+</ul>
+<h3 id="shingle"><a href="#shingle" class="headerlink" title="shingle"></a>shingle</h3><p> <img src="http://ww1.sinaimg.cn/large/006tNc79ly1g4twqxojshj31aj0u047l.jpg" alt="image-20190709165335311"></p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twqyl31lj31bs0u0n2x.jpg" alt="image-20190709165446540"></p>
+<h3 id="梗概sketch"><a href="#梗概sketch" class="headerlink" title="梗概sketch"></a>梗概sketch</h3><ul>
+<li>每一篇文档的single的个数是在太多了</li>
+<li>为了提高效率的话，我们一个使用文档的梗概来表示文档，它由文档中的single集合中精巧挑选出的子集构成</li>
+<li>比如说，shingle里面有10000个，但是梗概只包含其中的200个</li>
+<li>我们可以通过一系列的置换$\pi_1…,\pi_{200}$来进行的定义</li>
+<li>之后我们使用置换后的向量作为结果</li>
+</ul>
+<p>例子：</p>
+<p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4twqz327pj31bt0u0wjw.jpg" alt="image-20190709170047919"></p>
+<h2 id="Lecture-20-链接分析"><a href="#Lecture-20-链接分析" class="headerlink" title="Lecture-20 链接分析"></a>Lecture-20 链接分析</h2><h3 id="锚文本"><a href="#锚文本" class="headerlink" title="锚文本"></a>锚文本</h3><p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twpvk82jj31620qgjxg.jpg" alt="image-20190709212717113"></p>
+<p>简单来说，锚文本就是描述链接的文本。因此，锚文本往往比本身更能揭示网页的内容。同时在计算过程中，锚文本一个赋予比文档更加重要的权重。</p>
+<h3 id="pageRank"><a href="#pageRank" class="headerlink" title="pageRank"></a>pageRank</h3><p>假设一个Web使用者，在Web上随机游走(浏览)。</p>
+<ul>
+<li>开始于一个随机页面</li>
+<li>在接下每一步，都使用相同的概率访问当前页面所指向的其他页面</li>
+</ul>
+<p>在稳定的情况下，每一个页面都会有一个长时访问。</p>
+<p><strong>这个长时访问就是网页的pageRank值</strong></p>
+<p>PageRank=长时访问频率=稳态概率</p>
+<h3 id="原始的PageRank公式"><a href="#原始的PageRank公式" class="headerlink" title="原始的PageRank公式"></a>原始的PageRank公式</h3><script type="math/tex; mode=display">
+R(u)=c \sum_{v \in B_{u}} \frac{R(v)}{N_{v}}</script><p>其中，$R(u)$和$R(v)$是分别是网页$u,v$的pagerank值，$B_u$指的是指向网页$u$的网页集合，$N_v$是网页$v$的出链数目。一个网页的PageRank等于所有的指向它的网页的PageRank的<strong>分量</strong>之和(<em>c</em>为归一化参数)。网页的每条出链上每个分量上承载了相同的PageRank分量。</p>
+<p>相当于是限流了。之后把流量叠加之后乘一个阈值就好了。</p>
+<h3 id="PageRank的特点"><a href="#PageRank的特点" class="headerlink" title="PageRank的特点"></a>PageRank的特点</h3><ul>
+<li>一个网页如果它的入链越多，那么它也越重要</li>
+<li>如果一个网页被很多的重要网页指向，那么它也重要</li>
+</ul>
+<h3 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h3><p>如果原网页出现了环怎么办？</p>
+<p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4tx8kcla5j31980oawjd.jpg" alt="image-20190709214517454"></p>
+<h3 id="HITS算法"><a href="#HITS算法" class="headerlink" title="HITS算法"></a>HITS算法</h3><p>为每个网页计算两个值</p>
+<ul>
+<li>Hub：作为目录型或者导航型网页的权重</li>
+<li>Authority：作为权威型网页的权重</li>
+</ul>
+<h3 id="计算方法"><a href="#计算方法" class="headerlink" title="计算方法"></a>计算方法</h3><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4txdug4xaj314n0u0wm9.jpg" alt="image-20190709215022005"></p>
+<h3 id="pageRank-VS-HITS"><a href="#pageRank-VS-HITS" class="headerlink" title="pageRank VS HITS"></a>pageRank VS HITS</h3><ul>
+<li>网页的pagerank与查询主题无关，可以事先算好，因此适合于大型搜索引擎的应用</li>
+<li>HITS算法的计算和查询主题是想的，检索之后再进行，所以不适用于大型搜索系统</li>
+</ul>
+<h2 id="国际惯例"><a href="#国际惯例" class="headerlink" title="国际惯例"></a>国际惯例</h2><p>信息检索导论-王斌</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你喜欢这篇文章，可以支持我继续更新呀！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Kuroyukihime WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Kuroyukihime Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:19px;">感谢您的阅读，欢迎在评论区纠错。如需转载，请注明本文出处，谢谢。</div>
+    
+</div>
+	  
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/information-retireval/" rel="tag"># information-retireval</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/torch-mod/" rel="next" title="关于pytorch的一些模版">
+                <i class="fa fa-chevron-left"></i> 关于pytorch的一些模版
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+  <div id="gitalk-container"></div>
+  
+  
+  
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image" src="/images/lotus.jpg" alt="Kuroyukihime">
+            
+              <p class="site-author-name" itemprop="name">Kuroyukihime</p>
+              <p class="site-description motion-element" itemprop="description">一只NLP、ML萌新，欢迎探讨问题。</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">7</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/caojiangxia" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://codeforces.com/profile/caojiangxia" target="_blank" title="codeforces">
+                      
+                        <i class="fa fa-fw fa-globe"></i>codeforces</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                Links
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="https://blog.csdn.net/yexiaohhjk" title="MrYx" target="_blank">MrYx</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信息检索课程复习笔记"><span class="nav-number">1.</span> <span class="nav-text">信息检索课程复习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-0-导论"><span class="nav-number">1.1.</span> <span class="nav-text">lecture-0 导论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本内容"><span class="nav-number">1.1.1.</span> <span class="nav-text">基本内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#高级内容"><span class="nav-number">1.1.2.</span> <span class="nav-text">高级内容</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-1-布尔检索"><span class="nav-number">1.2.</span> <span class="nav-text">lecture-1 布尔检索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#文档的存储方式"><span class="nav-number">1.2.0.1.</span> <span class="nav-text">文档的存储方式</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture2-词汇表和倒排记录表"><span class="nav-number">1.3.</span> <span class="nav-text">lecture2-词汇表和倒排记录表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#词汇表的构建-中文分词"><span class="nav-number">1.3.1.</span> <span class="nav-text">词汇表的构建-中文分词</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#跳表指针"><span class="nav-number">1.3.2.</span> <span class="nav-text">跳表指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#短语查询"><span class="nav-number">1.3.3.</span> <span class="nav-text">短语查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#解决方案"><span class="nav-number">1.3.3.1.</span> <span class="nav-text">解决方案</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-3-词典以及容错式检索"><span class="nav-number">1.4.</span> <span class="nav-text">lecture-3 词典以及容错式检索</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于词项定位的数据结构"><span class="nav-number">1.4.0.1.</span> <span class="nav-text">用于词项定位的数据结构</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#树"><span class="nav-number">1.4.1.</span> <span class="nav-text">树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#通配符查询"><span class="nav-number">1.4.2.</span> <span class="nav-text">通配符查询</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#轮排索引"><span class="nav-number">1.4.2.1.</span> <span class="nav-text">轮排索引</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K-gram索引"><span class="nav-number">1.4.2.2.</span> <span class="nav-text">K-gram索引</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拼写矫正"><span class="nav-number">1.4.3.</span> <span class="nav-text">拼写矫正</span></a></li></ol><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-4-索引构建"><span class="nav-number">1.5.</span> <span class="nav-text">lecture-4 索引构建</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BSBI"><span class="nav-number">1.5.1.</span> <span class="nav-text">BSBI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPIMI"><span class="nav-number">1.5.2.</span> <span class="nav-text">SPIMI</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MapReduce"><span class="nav-number">1.5.3.</span> <span class="nav-text">MapReduce</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态构建索引"><span class="nav-number">1.5.4.</span> <span class="nav-text">动态构建索引</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#对数合并"><span class="nav-number">1.5.5.</span> <span class="nav-text">对数合并</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-5-压缩索引"><span class="nav-number">1.6.</span> <span class="nav-text">lecture-5 压缩索引</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#有损压缩"><span class="nav-number">1.6.1.</span> <span class="nav-text">有损压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无损压缩"><span class="nav-number">1.6.2.</span> <span class="nav-text">无损压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#预测词表大小的方法"><span class="nav-number">1.6.3.</span> <span class="nav-text">预测词表大小的方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词表的存储方式"><span class="nav-number">1.6.4.</span> <span class="nav-text">词表的存储方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#倒排记录表的压缩"><span class="nav-number">1.6.5.</span> <span class="nav-text">倒排记录表的压缩</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变长编码"><span class="nav-number">1.6.6.</span> <span class="nav-text">变长编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#可变字节VB码"><span class="nav-number">1.6.7.</span> <span class="nav-text">可变字节VB码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#r编码"><span class="nav-number">1.6.8.</span> <span class="nav-text">r编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">1.6.9.</span> <span class="nav-text">总结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-6-文档评分、词项权重计算和向量空间模型"><span class="nav-number">1.7.</span> <span class="nav-text">lecture-6 文档评分、词项权重计算和向量空间模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#jaccard系数"><span class="nav-number">1.7.1.</span> <span class="nav-text">jaccard系数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扩展的布尔模型"><span class="nav-number">1.7.2.</span> <span class="nav-text">扩展的布尔模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于模糊集的检索模型"><span class="nav-number">1.7.3.</span> <span class="nav-text">基于模糊集的检索模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询-文档的匹配得分计算"><span class="nav-number">1.7.4.</span> <span class="nav-text">查询-文档的匹配得分计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TF"><span class="nav-number">1.7.4.1.</span> <span class="nav-text">TF</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#词袋模型"><span class="nav-number">1.7.4.2.</span> <span class="nav-text">词袋模型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#TFIDF权重计算"><span class="nav-number">1.7.5.</span> <span class="nav-text">TFIDF权重计算</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#文档频率-DF"><span class="nav-number">1.8.</span> <span class="nav-text">文档频率-DF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逆文档频率idf"><span class="nav-number">1.8.0.1.</span> <span class="nav-text">逆文档频率idf</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权重的计算"><span class="nav-number">1.8.1.</span> <span class="nav-text">权重的计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向量空间模型"><span class="nav-number">1.8.2.</span> <span class="nav-text">向量空间模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算查询和文档的相似度的话"><span class="nav-number">1.8.3.</span> <span class="nav-text">计算查询和文档的相似度的话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-7-完整搜索系统中的评分计算方式"><span class="nav-number">1.9.</span> <span class="nav-text">lecture-7 完整搜索系统中的评分计算方式</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#结果排序的动机"><span class="nav-number">1.9.1.</span> <span class="nav-text">结果排序的动机</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#余弦归一化"><span class="nav-number">1.9.2.</span> <span class="nav-text">余弦归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回转归一化"><span class="nav-number">1.9.3.</span> <span class="nav-text">回转归一化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结果排序的实现"><span class="nav-number">1.9.4.</span> <span class="nav-text">结果排序的实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询词项无权重的话"><span class="nav-number">1.9.5.</span> <span class="nav-text">查询词项无权重的话</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不进行全部的排序"><span class="nav-number">1.9.6.</span> <span class="nav-text">不进行全部的排序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#提前终止计算"><span class="nav-number">1.9.7.</span> <span class="nav-text">提前终止计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了"><span class="nav-number">1.9.8.</span> <span class="nav-text">我们很多时候都不要求最好的答案，而是一个尽量好的答案就好了</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#索引去除"><span class="nav-number">1.9.8.1.</span> <span class="nav-text">索引去除</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#胜者表"><span class="nav-number">1.9.8.2.</span> <span class="nav-text">胜者表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#静态质量得分排序方式"><span class="nav-number">1.9.9.</span> <span class="nav-text">静态质量得分排序方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#影响度排序"><span class="nav-number">1.9.9.1.</span> <span class="nav-text">影响度排序</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#簇剪枝"><span class="nav-number">1.9.9.2.</span> <span class="nav-text">簇剪枝</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-8-检索的评价"><span class="nav-number">1.10.</span> <span class="nav-text">lecture-8 检索的评价</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Pooling方法计算召回率"><span class="nav-number">1.10.1.</span> <span class="nav-text">Pooling方法计算召回率</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#F-X的值的计算"><span class="nav-number">1.11.</span> <span class="nav-text">F-X的值的计算</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#精确率Accuracy的计算方式"><span class="nav-number">1.11.1.</span> <span class="nav-text">精确率Accuracy的计算方式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#P-R曲线"><span class="nav-number">1.11.2.</span> <span class="nav-text">P-R曲线</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平均正确率-Average-Precision"><span class="nav-number">1.11.3.</span> <span class="nav-text">平均正确率(Average Precision)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#对于未插值的AP来说，这也是最常用的方法："><span class="nav-number">1.11.3.1.</span> <span class="nav-text">对于未插值的AP来说，这也是最常用的方法：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#插值的AP"><span class="nav-number">1.11.3.2.</span> <span class="nav-text">插值的AP</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#只对返回的相关的文档计算AP值"><span class="nav-number">1.11.3.3.</span> <span class="nav-text">只对返回的相关的文档计算AP值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#不考虑召回率的时候"><span class="nav-number">1.11.3.4.</span> <span class="nav-text">不考虑召回率的时候</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多查询的评价方式"><span class="nav-number">1.11.3.5.</span> <span class="nav-text">多查询的评价方式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NDCG"><span class="nav-number">1.11.3.6.</span> <span class="nav-text">NDCG</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-9-相关反馈及查询扩展"><span class="nav-number">1.12.</span> <span class="nav-text">lecture-9 相关反馈及查询扩展</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#平均数的扩展"><span class="nav-number">1.12.1.</span> <span class="nav-text">平均数的扩展</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询扩展和相关反馈"><span class="nav-number">1.12.2.</span> <span class="nav-text">查询扩展和相关反馈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#动机"><span class="nav-number">1.12.2.1.</span> <span class="nav-text">动机</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#提升召回率的方法"><span class="nav-number">1.12.2.2.</span> <span class="nav-text">提升召回率的方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#相关反馈"><span class="nav-number">1.12.3.</span> <span class="nav-text">相关反馈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#质心"><span class="nav-number">1.12.4.</span> <span class="nav-text">质心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocchio算法"><span class="nav-number">1.12.5.</span> <span class="nav-text">Rocchio算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隐式相关反馈"><span class="nav-number">1.12.6.</span> <span class="nav-text">隐式相关反馈</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#查询扩展"><span class="nav-number">1.12.7.</span> <span class="nav-text">查询扩展</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-10-排序学习"><span class="nav-number">1.13.</span> <span class="nav-text">lecture-10 排序学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于pointwise的排序学习"><span class="nav-number">1.13.1.</span> <span class="nav-text">基于pointwise的排序学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于pairwise的排序学习"><span class="nav-number">1.13.2.</span> <span class="nav-text">基于pairwise的排序学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于Listwise的排序学习"><span class="nav-number">1.13.3.</span> <span class="nav-text">基于Listwise的排序学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用场景"><span class="nav-number">1.13.4.</span> <span class="nav-text">应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-11-基于语言建模的IR模型"><span class="nav-number">1.14.</span> <span class="nav-text">Lecture-11 基于语言建模的IR模型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概率检索模型"><span class="nav-number">1.14.1.</span> <span class="nav-text">概率检索模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BM25模型"><span class="nav-number">1.14.2.</span> <span class="nav-text">BM25模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic回归IR模型"><span class="nav-number">1.14.3.</span> <span class="nav-text">Logistic回归IR模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二值独立模型-BIM"><span class="nav-number">1.14.4.</span> <span class="nav-text">二值独立模型$BIM$</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#OkapiBM25：一个非二值模型"><span class="nav-number">1.14.5.</span> <span class="nav-text">OkapiBM25：一个非二值模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#统计语言模型SLM"><span class="nav-number">1.14.6.</span> <span class="nav-text">统计语言模型SLM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大似然估计"><span class="nav-number">1.14.7.</span> <span class="nav-text">最大似然估计</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#平滑策略"><span class="nav-number">1.14.8.</span> <span class="nav-text">平滑策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于语言模型的IR"><span class="nav-number">1.14.9.</span> <span class="nav-text">基于语言模型的IR</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本生成的计算模型"><span class="nav-number">1.14.10.</span> <span class="nav-text">文本生成的计算模型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-12-朴素贝叶斯分类器"><span class="nav-number">1.15.</span> <span class="nav-text">Lecture-12 朴素贝叶斯分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯"><span class="nav-number">1.15.1.</span> <span class="nav-text">朴素贝叶斯</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#具有最大后验概率的类别"><span class="nav-number">1.15.1.1.</span> <span class="nav-text">具有最大后验概率的类别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#平滑方式"><span class="nav-number">1.15.1.2.</span> <span class="nav-text">平滑方式</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯的两种实现方式"><span class="nav-number">1.15.2.</span> <span class="nav-text">朴素贝叶斯的两种实现方式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#贝努利模型"><span class="nav-number">1.15.2.1.</span> <span class="nav-text">贝努利模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多项式模型"><span class="nav-number">1.15.2.2.</span> <span class="nav-text">多项式模型</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-13-基于向量空间的分类器"><span class="nav-number">1.16.</span> <span class="nav-text">lecture-13 基于向量空间的分类器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#特征降维的种类"><span class="nav-number">1.16.1.</span> <span class="nav-text">特征降维的种类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PCA方法"><span class="nav-number">1.16.2.</span> <span class="nav-text">PCA方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LDA-线性判别分析"><span class="nav-number">1.16.3.</span> <span class="nav-text">LDA-线性判别分析</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PCA和LDA区别："><span class="nav-number">1.16.3.1.</span> <span class="nav-text">PCA和LDA区别：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征选择所考虑的因素"><span class="nav-number">1.16.4.</span> <span class="nav-text">特征选择所考虑的因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Rocchio方法"><span class="nav-number">1.16.5.</span> <span class="nav-text">Rocchio方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#相关反馈-1"><span class="nav-number">1.16.5.1.</span> <span class="nav-text">相关反馈</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kNN分类器K-nearest-neighbors"><span class="nav-number">1.16.6.</span> <span class="nav-text">kNN分类器K nearest neighbors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率型kNN"><span class="nav-number">1.16.7.</span> <span class="nav-text">概率型kNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#kNN的时间复杂度"><span class="nav-number">1.16.8.</span> <span class="nav-text">kNN的时间复杂度</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-14-支持向量机及排序机器学习"><span class="nav-number">1.17.</span> <span class="nav-text">Lecture-14 支持向量机及排序机器学习</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SVM"><span class="nav-number">1.17.1.</span> <span class="nav-text">SVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于布尔权重的学习"><span class="nav-number">1.17.2.</span> <span class="nav-text">基于布尔权重的学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#权重学习"><span class="nav-number">1.17.2.1.</span> <span class="nav-text">权重学习</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#域加权评分"><span class="nav-number">1.17.2.2.</span> <span class="nav-text">域加权评分</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基于实数权重的学习"><span class="nav-number">1.17.3.</span> <span class="nav-text">基于实数权重的学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#将IR排序问题看成一个序回归问题"><span class="nav-number">1.17.4.</span> <span class="nav-text">将IR排序问题看成一个序回归问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lecture-15-扁平聚类"><span class="nav-number">1.18.</span> <span class="nav-text">lecture-15 扁平聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#扁平聚类VS层次聚类"><span class="nav-number">1.18.1.</span> <span class="nav-text">扁平聚类VS层次聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#硬聚类VS软聚类"><span class="nav-number">1.18.2.</span> <span class="nav-text">硬聚类VS软聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#扁平算法"><span class="nav-number">1.18.3.</span> <span class="nav-text">扁平算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-means聚类算法"><span class="nav-number">1.18.4.</span> <span class="nav-text">K-means聚类算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#停止准则"><span class="nav-number">1.18.4.1.</span> <span class="nav-text">停止准则</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#目标函数"><span class="nav-number">1.18.4.2.</span> <span class="nav-text">目标函数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#种子的初始化选择"><span class="nav-number">1.18.5.</span> <span class="nav-text">种子的初始化选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#聚类结果的评价"><span class="nav-number">1.18.5.1.</span> <span class="nav-text">聚类结果的评价</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#纯度"><span class="nav-number">1.18.5.2.</span> <span class="nav-text">纯度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#兰迪指数-Rand-Index"><span class="nav-number">1.18.5.3.</span> <span class="nav-text">兰迪指数(Rand Index)</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#簇的个数的确定"><span class="nav-number">1.18.6.</span> <span class="nav-text">簇的个数的确定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本想法"><span class="nav-number">1.18.6.1.</span> <span class="nav-text">基本想法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-16-层次聚类"><span class="nav-number">1.19.</span> <span class="nav-text">Lecture-16 层次聚类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#层次凝聚式聚类-HAC"><span class="nav-number">1.19.1.</span> <span class="nav-text">层次凝聚式聚类(HAC)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分裂式聚类"><span class="nav-number">1.19.2.</span> <span class="nav-text">分裂式聚类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#信息检索里面的关键的问题"><span class="nav-number">1.19.3.</span> <span class="nav-text">信息检索里面的关键的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#二分k均值：一个自顶向下的算法"><span class="nav-number">1.19.4.</span> <span class="nav-text">二分k均值：一个自顶向下的算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#簇的标签生成"><span class="nav-number">1.19.5.</span> <span class="nav-text">簇的标签生成</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#差别式簇标签生成方法"><span class="nav-number">1.19.5.1.</span> <span class="nav-text">差别式簇标签生成方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#非差别式簇标签的生成方法"><span class="nav-number">1.19.5.2.</span> <span class="nav-text">非差别式簇标签的生成方法</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-17-隐性语义索引-LSI"><span class="nav-number">1.20.</span> <span class="nav-text">Lecture-17 隐性语义索引-LSI</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#lsi简介"><span class="nav-number">1.20.1.</span> <span class="nav-text">lsi简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#特征分解"><span class="nav-number">1.20.2.</span> <span class="nav-text">特征分解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特征分解的含义"><span class="nav-number">1.20.2.1.</span> <span class="nav-text">特征分解的含义</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#奇异值分解"><span class="nav-number">1.20.3.</span> <span class="nav-text">奇异值分解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空间降维处理"><span class="nav-number">1.20.4.</span> <span class="nav-text">空间降维处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#低秩逼近"><span class="nav-number">1.20.5.</span> <span class="nav-text">低秩逼近</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSI的优点"><span class="nav-number">1.20.6.</span> <span class="nav-text">LSI的优点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-18-web搜索"><span class="nav-number">1.21.</span> <span class="nav-text">Lecture-18 web搜索</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#重复检测"><span class="nav-number">1.21.1.</span> <span class="nav-text">重复检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#近似重复的检"><span class="nav-number">1.21.2.</span> <span class="nav-text">近似重复的检</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#shingle"><span class="nav-number">1.21.3.</span> <span class="nav-text">shingle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#梗概sketch"><span class="nav-number">1.21.4.</span> <span class="nav-text">梗概sketch</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Lecture-20-链接分析"><span class="nav-number">1.22.</span> <span class="nav-text">Lecture-20 链接分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#锚文本"><span class="nav-number">1.22.1.</span> <span class="nav-text">锚文本</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pageRank"><span class="nav-number">1.22.2.</span> <span class="nav-text">pageRank</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#原始的PageRank公式"><span class="nav-number">1.22.3.</span> <span class="nav-text">原始的PageRank公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PageRank的特点"><span class="nav-number">1.22.4.</span> <span class="nav-text">PageRank的特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足"><span class="nav-number">1.22.5.</span> <span class="nav-text">不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#HITS算法"><span class="nav-number">1.22.6.</span> <span class="nav-text">HITS算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#计算方法"><span class="nav-number">1.22.7.</span> <span class="nav-text">计算方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#pageRank-VS-HITS"><span class="nav-number">1.22.8.</span> <span class="nav-text">pageRank VS HITS</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#国际惯例"><span class="nav-number">1.23.</span> <span class="nav-text">国际惯例</span></a></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Kuroyukihime</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'b967c8770c5b69549da3',
+          clientSecret: '293646df8ac641b88e8540434b7b21b205e46024',
+          repo: 'caojiangxia.github.io',
+          owner: 'caojiangxia',
+          admin: ['caojiangxia'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("T7KcjJJp64BnMKCS46V2ucUm-gzGzoHsz", "DOkoBoCTAtTujSpi8QoEaXPi");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  <div class="bg_content">
+  <canvas id="canvas"></canvas>
+  </div>
+</body>
+</html>
+<!-- 页面点击小红心 -->
+<script type="text/javascript" src="/js/src/clicklove.js"></script>
+<script type="text/javascript" src="/js/src/dynamic_bg.js"></script>
+

@@ -1,3 +1,4 @@
+https://caojiangxia.github.io/information-retrieval/
 https://caojiangxia.github.io/torch-mod/
 https://caojiangxia.github.io/SVM/
 https://caojiangxia.github.io/Meissel-Lehmer/
