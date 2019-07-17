@@ -966,7 +966,7 @@ accuracy= \frac {RR+NN} {RN+RR+NR+NN}</script><p>但是精确率并不适合信�
 <script type="math/tex; mode=display">
 AP = \frac {1/1+2/2+3/5+4/10+5/20+0} {6}</script><p>其中分子是召回率变化的点，分子是总的相关的文档数。</p>
 <h4 id="插值的AP"><a href="#插值的AP" class="headerlink" title="插值的AP"></a>插值的AP</h4><p>分别在召回率为0.1，0.2，0.3，。。。，1.0的十一个点上求平均值。等价于11个点的平均。</p>
-<h4 id="只对返回的相关的文档计算AP值"><a href="#只对返回的相关的文档计算AP值" class="headerlink" title="只对返回的相关的文档计算AP值"></a>只对返回的相关的文档计算AP值</h4><p>这个就很简单了，相对于第一种，我们只需要改变分子的数量为返回的相关文档数就好。</p>
+<h4 id="只对返回的相关的文档计算AP值"><a href="#只对返回的相关的文档计算AP值" class="headerlink" title="只对返回的相关的文档计算AP值"></a>只对返回的相关的文档计算AP值</h4><p>这个就很简单了，相对于第一种，我们只需要改变分母的数量为返回的相关文档数就好。</p>
 <script type="math/tex; mode=display">
 AP = \frac {1/1+2/2+3/5+4/10+5/20} {5}</script><h4 id="不考虑召回率的时候"><a href="#不考虑召回率的时候" class="headerlink" title="不考虑召回率的时候"></a>不考虑召回率的时候</h4><p>precision@N: 在第N个位置上的正确率，对于大部分搜索引擎来说，这个还是很有用的。一般只用P@10和P@20的值</p>
 <p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4set5oif6j30ym0le0wc.jpg" alt="image-20190705231220137"></p>
@@ -1377,8 +1377,8 @@ RSS+K\lambda</script><h2 id="Lecture-16-层次聚类"><a href="#Lecture-16-层�
 </ul>
 <h3 id="信息检索里面的关键的问题"><a href="#信息检索里面的关键的问题" class="headerlink" title="信息检索里面的关键的问题"></a>信息检索里面的关键的问题</h3><p>我们如何定义簇的相似度？</p>
 <ul>
-<li>单链接：最大的相似度，计算簇间任意两篇文档之间的相似度，取其中的最大值</li>
-<li>全链接：最小的相似度，计算间簇任意两篇文档之间的相似度，取其中的最小值</li>
+<li>单链接：最小的相似度，计算间簇任意两篇文档之间的相似度，取其中的最小值</li>
+<li>全链接：最大的相似度，计算簇间任意两篇文档之间的相似度，取其中的最大值</li>
 <li>质心法：平均类间的相似度，首先对每个簇维护一个质心，之后计算质心的相似度，或者计算不同簇之间的相似度取平均值。</li>
 <li>组平均（GAAC）：把两个簇视为一个整体，之后把这个整体中的任意两个都计算相似度，最后计算总的相似度的平均值。</li>
 </ul>
@@ -1461,7 +1461,18 @@ A=U \Sigma V^{T}</script><p><img src="http://ww3.sinaimg.cn/large/006tNc79ly1g4t
 <li>奇异值矩阵$\Sigma$，对角矩阵，对角线上的奇异值表示的是语义维度的重要性。</li>
 </ul>
 <h3 id="空间降维处理"><a href="#空间降维处理" class="headerlink" title="空间降维处理"></a>空间降维处理</h3><p>实际上，$\Sigma$矩阵是十分稀疏的，因为有些不重要的语义，我们其实可以把那些维度给压缩掉，这样我们一样可以保留下来绝大部分的信息。同时可以去除一些噪音。</p>
-<h3 id="低秩逼近"><a href="#低秩逼近" class="headerlink" title="低秩逼近"></a>低秩逼近</h3><p>在很多情况下，前10%甚至1%的奇异值的和就占了全部奇异值之和的99%以上了。换句话说，我们可以用前$r$大的奇异值来近似描述矩阵，我们可以记作：</p>
+<h3 id="低秩逼近"><a href="#低秩逼近" class="headerlink" title="低秩逼近"></a>低秩逼近</h3><p>在这里我们定义这么一个问题。给定一个$m\cdot n$ 的矩阵$C$和一个正整数$k$，我们希望找一个秩不高于$k$的$m\cdot n$矩阵$C_k$，同时使得两个矩阵的差$X=C-C_k$的Frobenius模最小，计算公式如下：</p>
+<script type="math/tex; mode=display">
+||X||_F=\sqrt{\sum_{i=1}^M \sum_{i=1}^N X_{ij}^2}</script><p>假设$C$原本的秩是$r$，那么我们有当$k&gt;=r$的时候，$C_k=C$，但是当$k&lt;&lt;r$的时候，我们就称$C_k$为低秩逼近。</p>
+<p>我们在SVD中使用低秩逼近的方式很简单：</p>
+<ul>
+<li>首先通过SVD分解$C$得到$U\Sigma V^T$</li>
+<li>之后把对角线上的$r-k$个最小的奇异值置为0，从而我们得到$\Sigma_k$</li>
+<li>计算$C_k=U\Sigma_k V^T$作为$C$的低秩逼近的结果</li>
+</ul>
+<script type="math/tex; mode=display">
+\begin{array}{c}{C_{k}=U \Sigma_{k} V^{\top}} \\ {\left(\begin{array}{ccccc}{\sigma_{1}} & {0} & {0} & {0} & {0} \\ {0} & {\cdots} & {0} & {0} & {0} \\ {0} & {0} & {\sigma_{k}} & {0} & {0} \\ {0} & {0} & {0} & {0} & {0} \\ {0} & {0} & {0} & {0} & {\cdots}\end{array}\right) V^{\top}} \\ {=\sum_{i=1}^{k} \sigma_{i} \vec{u}_{i} \vec{v}_{i}^{\top}}\end{array}</script><p>由于$\sigma _i$逐渐减小，所以对应的$u_i,v_i$所能提供的权重也是逐渐减小的。</p>
+<p>在很多情况下，<strong>前10%甚至1%的奇异值的和就占了全部奇异值之和的99%以上了</strong>。换句话说，我们可以用前$r$大的奇异值来近似描述矩阵，我们可以记作：</p>
 <script type="math/tex; mode=display">
 A_{m \times n} \approx U_{m \times r} \Sigma_{r \times r} V_{r \times n}^{T}</script><p><img src="http://ww2.sinaimg.cn/large/006tNc79ly1g4twr3diuhj30mw0cc3z4.jpg" alt="image-20190709161118393"></p>
 <h3 id="LSI的优点"><a href="#LSI的优点" class="headerlink" title="LSI的优点"></a>LSI的优点</h3><ul>
