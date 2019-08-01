@@ -1377,8 +1377,8 @@ RSS+K\lambda</script><h2 id="Lecture-16-层次聚类"><a href="#Lecture-16-层�
 </ul>
 <h3 id="信息检索里面的关键的问题"><a href="#信息检索里面的关键的问题" class="headerlink" title="信息检索里面的关键的问题"></a>信息检索里面的关键的问题</h3><p>我们如何定义簇的相似度？</p>
 <ul>
-<li>单链接：最小的相似度，计算间簇任意两篇文档之间的相似度，取其中的最小值</li>
-<li>全链接：最大的相似度，计算簇间任意两篇文档之间的相似度，取其中的最大值</li>
+<li>单链接：最大的相似度，计算间簇任意两篇文档之间的相似度，取其中的最大值，对应图中的距离最短</li>
+<li>全链接：最小的相似度，计算簇间任意两篇文档之间的相似度，取其中的最小值，对应图中的距离最大</li>
 <li>质心法：平均类间的相似度，首先对每个簇维护一个质心，之后计算质心的相似度，或者计算不同簇之间的相似度取平均值。</li>
 <li>组平均（GAAC）：把两个簇视为一个整体，之后把这个整体中的任意两个都计算相似度，最后计算总的相似度的平均值。</li>
 </ul>
@@ -1608,6 +1608,10 @@ R(u)=c \sum_{v \in B_{u}} \frac{R(v)}{N_{v}}</script><p>其中，$R(u)$和$R(v)$
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/linux-command/" rel="prev" title="一些linux常用的命令">
+                一些linux常用的命令 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -1687,7 +1691,7 @@ R(u)=c \sum_{v \in B_{u}} \frac{R(v)}{N_{v}}</script><p>其中，$R(u)$和$R(v)$
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -1709,7 +1713,7 @@ R(u)=c \sum_{v \in B_{u}} \frac{R(v)}{N_{v}}</script><p>其中，$R(u)$和$R(v)$
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>

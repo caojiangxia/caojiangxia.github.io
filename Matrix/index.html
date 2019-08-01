@@ -521,7 +521,7 @@ P>=1 \quad ||x||_P=(\sum_{i=1}^n|x_i|^{P})^{\frac 1 P}</script><h2 id="矩阵的
 </ol>
 <h2 id="酉矩阵与正交矩阵"><a href="#酉矩阵与正交矩阵" class="headerlink" title="酉矩阵与正交矩阵"></a>酉矩阵与正交矩阵</h2><h3 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h3><p><strong>酉矩阵</strong>：对于复矩阵$U_{n\times n}$，它的行或列是$\mathbb{C}^{n\times n}$的标准正交基，所谓标准正交基就是模长为1，且两两做内积为0。</p>
 <p><strong>正交矩阵</strong>：对于实数矩阵$P_{n\times n}$，他的行或列是$\mathbb{R}^{n\times n}$的标准正交基，几何意义是经过变换后不改变长度的，仅仅将矩阵沿原点旋转。</p>
-<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>对于酉矩阵：$U^<em>U=I$且$U^{-1}=U^</em>$</p>
+<h3 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h3><p>对于酉矩阵：$U^-U=I$且$U^{-1}=U^-$，其中$x^-$表示$x$的共轭转置。</p>
 <p>对于正交矩阵：$P^TP=I$且$P^{-1}=P^T$</p>
 <p>酉矩阵的行<strong>和</strong>列均为标准正交基时，酉矩阵才是正交矩阵</p>
 <p>正交矩阵一定是酉矩阵，但是反之不一定</p>
@@ -537,7 +537,7 @@ A=QR</script><p>其中$Q$为正交矩阵，$R$为上三角矩阵</p>
 <li>$u^*x$表示$x$在由$\{u\}$张乘的一维空间的正交投影的长度</li>
 </ol>
 <p>基本投影是不等距的，既不是酉矩阵也不是正交矩阵。因为等距矩阵是非奇异的，基本投影是奇异的。</p>
-<p>非零向量$u\in \mathbb{C}^n$，在$span\{u\}$上的正交投影和$u^\perp $的正交投影分别为$P_u=\frac {uu^<em>}{u</em>u},P_{u^\perp}=I-\frac {uu^<em>}{u^</em>u}$</p>
+<p>非零向量$u\in \mathbb{C}^n$，在$span\{u\}$上的正交投影和$u^\perp $的正交投影分别为$P_u=\frac {uu^-}{u<em>u},P_{u^\perp}=I-\frac {uu^</em>}{u^*u}$</p>
 
       
     </div>
@@ -698,7 +698,7 @@ A=QR</script><p>其中$Q$为正交矩阵，$R$为上三角矩阵</p>
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">38</span>
+                  <span class="site-state-item-count">39</span>
                   <span class="site-state-item-name">posts</span>
                 </a>
               </div>
@@ -720,7 +720,7 @@ A=QR</script><p>其中$Q$为正交矩阵，$R$为上三角矩阵</p>
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-count">36</span>
                   <span class="site-state-item-name">tags</span>
                 </a>
               </div>
