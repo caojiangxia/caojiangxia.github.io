@@ -1,3 +1,5 @@
+https://caojiangxia.github.io/torch-api/
+https://caojiangxia.github.io/regex/
 https://caojiangxia.github.io/linux-command/
 https://caojiangxia.github.io/information-retrieval/
 https://caojiangxia.github.io/torch-mod/
