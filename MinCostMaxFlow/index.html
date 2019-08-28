@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT">
+  <meta name="keywords" content="MaxFlow,">
 
 
 
@@ -86,17 +86,18 @@
 
 
 
-<meta name="description" content="algorithmNLPcodeforces">
-<meta property="og:type" content="website">
-<meta property="og:title" content="categories">
-<meta property="og:url" content="https://caojiangxia.github.io/categories/index.html">
+<meta name="description" content="费用流最小费用最大流从上次讲最大流已经过了一段时间了，这次我们讲一讲最大流的另一种特殊情况，费用流，其全名应该是最小费用最大流。这个在算法竞赛中十分常用，因为只要牵扯到需要拆点和拆边的情况下，我们都需要用费用流，而这种操作实在是不能在普通了。 问题定义在这里，问题相比最大流要稍微复杂一些，给定我们一个图$G$，和图中一些边$E$,但是其中每条边有两种属性：  该条边的最大流量 该条边每通过一个流量">
+<meta name="keywords" content="MaxFlow">
+<meta property="og:type" content="article">
+<meta property="og:title" content="最小费用最大流">
+<meta property="og:url" content="https://caojiangxia.github.io/MinCostMaxFlow/index.html">
 <meta property="og:site_name" content="caojiangxia">
-<meta property="og:description" content="algorithmNLPcodeforces">
+<meta property="og:description" content="费用流最小费用最大流从上次讲最大流已经过了一段时间了，这次我们讲一讲最大流的另一种特殊情况，费用流，其全名应该是最小费用最大流。这个在算法竞赛中十分常用，因为只要牵扯到需要拆点和拆边的情况下，我们都需要用费用流，而这种操作实在是不能在普通了。 问题定义在这里，问题相比最大流要稍微复杂一些，给定我们一个图$G$，和图中一些边$E$,但是其中每条边有两种属性：  该条边的最大流量 该条边每通过一个流量">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-12-31T10:11:05.717Z">
+<meta property="og:updated_time" content="2019-08-27T14:30:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="categories">
-<meta name="twitter:description" content="algorithmNLPcodeforces">
+<meta name="twitter:title" content="最小费用最大流">
+<meta name="twitter:description" content="费用流最小费用最大流从上次讲最大流已经过了一段时间了，这次我们讲一讲最大流的另一种特殊情况，费用流，其全名应该是最小费用最大流。这个在算法竞赛中十分常用，因为只要牵扯到需要拆点和拆边的情况下，我们都需要用费用流，而这种操作实在是不能在普通了。 问题定义在这里，问题相比最大流要稍微复杂一些，给定我们一个图$G$，和图中一些边$E$,但是其中每条边有两种属性：  该条边的最大流量 该条边每通过一个流量">
 
 
 
@@ -126,13 +127,13 @@
 
 
 
-  <link rel="canonical" href="https://caojiangxia.github.io/categories/">
+  <link rel="canonical" href="https://caojiangxia.github.io/MinCostMaxFlow/">
 
 
 
 
 
-  <title>categories | caojiangxia</title>
+  <title>最小费用最大流 | caojiangxia</title>
   
 
 
@@ -289,40 +290,270 @@
 
   <div id="posts" class="posts-expand">
     
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://caojiangxia.github.io/MinCostMaxFlow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Kuroyukihime">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/lotus.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="caojiangxia">
+    </span>
+
     
-    
-    <div class="post-block page">
       <header class="post-header">
 
-	<h1 class="post-title" itemprop="name headline">categories</h1>
-
-
-
-</header>
-
-      
-      
-      
-      <div class="post-body">
         
         
-          <div class="category-all-page">
-            <div class="category-all-title">
-                7 categories in total
+          <h1 class="post-title" itemprop="name headline">最小费用最大流</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-08-27T22:30:22+08:00">
+                2019-08-27
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Post modified&#58;</span>
+              
+              <time title="Post modified" itemprop="dateModified" datetime="2019-08-27T22:30:22+08:00">
+                2019-08-27
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/MinCostMaxFlow/" class="leancloud_visitors" data-flag-title="最小费用最大流">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">Visitors&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Words count in article&#58;</span>
+                
+                <span title="Words count in article">
+                  
+                </span>
+              
+
+              
+
+              
             </div>
-            <div class="category-all">
-              <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/GCJ/">GCJ</a><span class="category-list-count">4</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/ML/">ML</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/NLP/">NLP</a><span class="category-list-count">5</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/Wonder/">Wonder</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/algorithm/">algorithm</a><span class="category-list-count">24</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/codeforces/">codeforces</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/categories/python/">python</a><span class="category-list-count">1</span></li></ul>
-            </div>
-          </div>
-        
-      </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
       
       
+
+      
+        <h1 id="费用流"><a href="#费用流" class="headerlink" title="费用流"></a>费用流</h1><h2 id="最小费用最大流"><a href="#最小费用最大流" class="headerlink" title="最小费用最大流"></a>最小费用最大流</h2><p>从上次讲最大流已经过了一段时间了，这次我们讲一讲最大流的另一种特殊情况，<strong>费用流</strong>，其全名应该是<strong>最小费用最大流</strong>。这个在算法竞赛中十分常用，因为只要牵扯到需要拆点和拆边的情况下，我们都需要用费用流，而这种操作实在是不能在普通了。</p>
+<h3 id="问题定义"><a href="#问题定义" class="headerlink" title="问题定义"></a>问题定义</h3><p>在这里，问题相比最大流要稍微复杂一些，给定我们一个图$G$，和图中一些边$E$,但是其中每条边有两种属性：</p>
+<ul>
+<li>该条边的最大流量</li>
+<li>该条边每通过一个流量，所需要的花费</li>
+</ul>
+<p>之后给定源点和汇点。问我们怎样用最小费用得到最大流量。</p>
+<p>其实这个问题也是一个很实际的问题，一个图，我们得到最大流的方式有很多，但是我们怎么得到最优的最大流方案？</p>
+<h3 id="解法"><a href="#解法" class="headerlink" title="解法"></a>解法</h3><p>这个时候，就轮到我们的EK算法出场了，我们只需要每次贪心的遵循每次走花费最少的路径从源点到汇点就好了，正确性是显而易见的。在我们找到话费最少的路径之后，我们也去得到限制的流量最小的瓶颈，之后构造反向边得到残差网络。计算花费的时候，只需要统计整条路径的花费乘上流量就好了。整个过程其实是非常简单的，写起来比dinic要轻松多了。</p>
+<p><strong>但是本文的目的并不是介绍这个算法</strong></p>
+<h3 id="拆点"><a href="#拆点" class="headerlink" title="拆点"></a>拆点</h3><p>拆点的意思很简单，就是我们限制节点经过的流量大小，换句话说，我们不仅有边有性质，我们的点也有性质，主要分为两种</p>
+<ul>
+<li>点有流量限制</li>
+<li>点有点权限制</li>
+</ul>
+<p>这个时候，我们只需要把点一分为二。同时中间根据需要，加上节点的边就好了。</p>
+<h3 id="超级源点，超级汇点"><a href="#超级源点，超级汇点" class="headerlink" title="超级源点，超级汇点"></a>超级源点，超级汇点</h3><p>有时候我们会遇到有多个源点，多个汇点的问题。</p>
+<p>我们通常的做法，就是自己增加两个节点，作为超级源点/汇点，超级源点/汇点连接所有源点/汇点，其中的流量和边权需要特殊情况特殊考虑。</p>
+<h3 id="拆边"><a href="#拆边" class="headerlink" title="拆边"></a>拆边</h3><p>拆边的时候，其实是很少见的，一般情况下，是由于边的代价公式不同，我们需要根据不同的流量建边，比如说花费是$cost*flow^2$。</p>
+<h3 id="取log"><a href="#取log" class="headerlink" title="取log"></a>取log</h3><p>有时候我们遇到一些题目，它求的是，所有边权的乘积作为花费。这个时候我们可以把边权取log，之后再正常计算就好了。</p>
+<h3 id="最大费用最大流"><a href="#最大费用最大流" class="headerlink" title="最大费用最大流"></a>最大费用最大流</h3><p>我们在做最小费用最大流的时候，只需要把边权先取反就好了。最后结果再取反。具体可以看下面的这个例题</p>
+<h2 id="一道具体例题"><a href="#一道具体例题" class="headerlink" title="一道具体例题"></a>一道具体例题</h2><p>有一个矩阵$A$，形状为$n*m$ ，表示有$n$个人和$m$个项目。$A_{ij}$表示编号为$i$的人完成项目$j$可以得到的回报为$A_{ij}$。同时每个任务只能完成一次，且每个人只能完成一个项目，问怎么安排，得到的结果最大？</p>
+<p>这是一个十分明显的最大费用最大流的题目，同时我们可以根据超级源点和汇点的写法，选择拆或者不拆点。</p>
+<p>下面给出解法</p>
+<p></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#include &lt;bits/stdc++.h&gt;</span></span><br><span class="line">using namespace std;</span><br><span class="line"><span class="comment">#define LL long long</span></span><br><span class="line">const int INF=<span class="number">1e9</span>;</span><br><span class="line">struct Edge&#123;</span><br><span class="line">    int <span class="keyword">from</span>,to,cap,flow,cost;</span><br><span class="line">    Edge(int u,int v,int c,int f,int w):<span class="keyword">from</span>(u),to(v),cap(c),flow(f),cost(w)&#123;&#125;</span><br><span class="line">&#125;;</span><br><span class="line">struct MCMF&#123;</span><br><span class="line">    int n,m;</span><br><span class="line">    static const int maxn=<span class="number">4105</span>;</span><br><span class="line">    vector&lt;Edge&gt; edges;</span><br><span class="line">    vector&lt;int&gt; G[maxn];</span><br><span class="line">    int inq[maxn]; //是否在队列中</span><br><span class="line">    int d[maxn]; //bellman</span><br><span class="line">    int p[maxn];  //上一条狐的编号</span><br><span class="line">    int a[maxn]; //可该进量</span><br><span class="line"></span><br><span class="line">    void init(int n)&#123;</span><br><span class="line">        this-&gt;n=n;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;n;i++)G[i].clear();  //注意编号</span><br><span class="line">        edges.clear();</span><br><span class="line">    &#125;</span><br><span class="line">    void addEdge(int <span class="keyword">from</span>,int to,int cap,int cost)&#123;</span><br><span class="line">        edges.push_back(Edge(<span class="keyword">from</span>,to,cap,<span class="number">0</span>,cost));</span><br><span class="line">        edges.push_back(Edge(to,<span class="keyword">from</span>,<span class="number">0</span>,<span class="number">0</span>,-cost));</span><br><span class="line">        m=edges.size();</span><br><span class="line">        G[<span class="keyword">from</span>].push_back(m<span class="number">-2</span>);</span><br><span class="line">        G[to].push_back(m<span class="number">-1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    bool BellmanFord(int s,int t,int &amp;flow,long long &amp;cost)&#123;</span><br><span class="line">        <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;n;i++)d[i]=INF; //注意编号</span><br><span class="line">        memset(inq,<span class="number">0</span>,sizeof inq);</span><br><span class="line">        d[s]=<span class="number">0</span>;inq[s]=<span class="number">1</span>;p[s]=<span class="number">-1</span>;a[s]=INF;</span><br><span class="line">        queue&lt;int&gt; Q;</span><br><span class="line">        Q.push(s);</span><br><span class="line">        <span class="keyword">while</span>(!Q.empty())&#123;</span><br><span class="line">            int u=Q.front();</span><br><span class="line">            Q.pop();</span><br><span class="line">            inq[u]=<span class="number">0</span>;</span><br><span class="line">            <span class="keyword">for</span>(int i=<span class="number">0</span>;i&lt;G[u].size();i++)&#123;</span><br><span class="line">                Edge &amp;e=edges[G[u][i]];</span><br><span class="line">                <span class="keyword">if</span>(e.cap&gt;e.flow&amp;&amp;d[e.to]&gt;d[u]+e.cost)&#123;</span><br><span class="line">                    d[e.to]=d[u]+e.cost;</span><br><span class="line">                    p[e.to]=G[u][i];</span><br><span class="line">                    a[e.to]=min(a[u],e.cap-e.flow);</span><br><span class="line">                    <span class="keyword">if</span>(!inq[e.to])&#123;</span><br><span class="line">                        Q.push(e.to);</span><br><span class="line">                        inq[e.to]=<span class="number">1</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(d[t]==INF)<span class="keyword">return</span> false;</span><br><span class="line">        flow+=a[t];</span><br><span class="line">        cost+=(LL)d[t]*a[t];</span><br><span class="line">        <span class="keyword">for</span>(int u=t;u!=s;u=edges[p[u]].<span class="keyword">from</span>)&#123;</span><br><span class="line">            edges[p[u]].flow+=a[t];</span><br><span class="line">            edges[p[u]^<span class="number">1</span>].flow-=a[t];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> true;</span><br><span class="line">    &#125;</span><br><span class="line">    //需要保证初始网络中没有负权圈</span><br><span class="line">    int MincostMaxflow(int s,int t,long long&amp; cost)&#123;</span><br><span class="line">        int flow=<span class="number">0</span>;</span><br><span class="line">        cost=<span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span>(BellmanFord(s,t,flow,cost));</span><br><span class="line">        <span class="keyword">return</span> flow;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;MF;</span><br><span class="line"></span><br><span class="line">int main(void)&#123;</span><br><span class="line">    int i,j,n,m,c,S,T,f;</span><br><span class="line">    long long cost;</span><br><span class="line">    scanf(<span class="string">"%d %d"</span>,&amp;n,&amp;m);</span><br><span class="line">    MF.init(<span class="number">2</span>+(n+m)*<span class="number">2</span>+<span class="number">10</span>);</span><br><span class="line">    S=<span class="number">2</span>*(n+m)+<span class="number">1</span>;</span><br><span class="line">    T=<span class="number">2</span>*(n+m)+<span class="number">2</span>;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(j=<span class="number">1</span>;j&lt;=m;j++)&#123;</span><br><span class="line">            scanf(<span class="string">"%d"</span>,&amp;c);</span><br><span class="line">            MF.addEdge(n+i,<span class="number">2</span>*n+j,<span class="number">1</span>,-c);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=n;i++)&#123;</span><br><span class="line">        MF.addEdge(S,i,m,<span class="number">0</span>);</span><br><span class="line">        MF.addEdge(i,n+i,m,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span>(i=<span class="number">1</span>;i&lt;=m;i++)&#123;</span><br><span class="line">        MF.addEdge(<span class="number">2</span>*n+i,<span class="number">2</span>*n+m+i,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">        MF.addEdge(<span class="number">2</span>*n+m+i,T,<span class="number">1</span>,<span class="number">0</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    f=MF.MincostMaxflow(S,T,cost);</span><br><span class="line">    printf(<span class="string">"%lld"</span>,-cost);</span><br><span class="line">&#125;</span><br><span class="line">/*</span><br><span class="line"><span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">1</span> <span class="number">3</span> <span class="number">3</span></span><br><span class="line"><span class="number">2</span> <span class="number">2</span> <span class="number">2</span></span><br><span class="line"><span class="number">3</span> <span class="number">2</span> <span class="number">1</span></span><br><span class="line"> */</span><br></pre></td></tr></table></figure>
+
       
     </div>
     
     
     
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>如果你喜欢这篇文章，可以支持我继续更新呀！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>Donate</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="Kuroyukihime WeChat Pay">
+        <p>WeChat Pay</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="Kuroyukihime Alipay">
+        <p>Alipay</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+	<div>
+	
+		<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:19px;">感谢您的阅读，欢迎在评论区纠错。如需转载，请注明本文出处，谢谢。</div>
+    
+</div>
+	  
+	</div>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MaxFlow/" rel="tag"># MaxFlow</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/kickstart2019D/" rel="next" title="文章名">
+                <i class="fa fa-chevron-left"></i> 文章名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
   </div>
 
 
@@ -357,8 +588,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -450,6 +690,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#费用流"><span class="nav-number">1.</span> <span class="nav-text">费用流</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#最小费用最大流"><span class="nav-number">1.1.</span> <span class="nav-text">最小费用最大流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#问题定义"><span class="nav-number">1.1.1.</span> <span class="nav-text">问题定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解法"><span class="nav-number">1.1.2.</span> <span class="nav-text">解法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拆点"><span class="nav-number">1.1.3.</span> <span class="nav-text">拆点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#超级源点，超级汇点"><span class="nav-number">1.1.4.</span> <span class="nav-text">超级源点，超级汇点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#拆边"><span class="nav-number">1.1.5.</span> <span class="nav-text">拆边</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#取log"><span class="nav-number">1.1.6.</span> <span class="nav-text">取log</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大费用最大流"><span class="nav-number">1.1.7.</span> <span class="nav-text">最大费用最大流</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一道具体例题"><span class="nav-number">1.2.</span> <span class="nav-text">一道具体例题</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
