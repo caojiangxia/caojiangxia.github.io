@@ -86,18 +86,21 @@
 
 
 
-<meta name="description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  motivation model experiments   Abstract可解释性">
+<meta name="description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  Motivation Model Experiments  Motivation目前的推荐系统一般使用side-information进行推荐，然">
 <meta name="keywords" content="Knowledge Graph Recommendation">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Jointly Learning Explainable Rules for Recommendation with Knowledge Graph">
 <meta property="og:url" content="https://caojiangxia.github.io/JLERRKG/index.html">
 <meta property="og:site_name" content="caojiangxia">
-<meta property="og:description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  motivation model experiments   Abstract可解释性">
+<meta property="og:description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  Motivation Model Experiments  Motivation目前的推荐系统一般使用side-information进行推荐，然">
 <meta property="og:locale" content="default">
+<meta property="og:image" content="https://caojiangxia.github.io/JLERRKG/1.png">
+<meta property="og:image" content="https://caojiangxia.github.io/JLERRKG/2.png">
 <meta property="og:updated_time" content="2019-08-28T13:37:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Jointly Learning Explainable Rules for Recommendation with Knowledge Graph">
-<meta name="twitter:description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  motivation model experiments   Abstract可解释性">
+<meta name="twitter:description" content="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。  Motivation Model Experiments  Motivation目前的推荐系统一般使用side-information进行推荐，然">
+<meta name="twitter:image" content="https://caojiangxia.github.io/JLERRKG/1.png">
 
 
 
@@ -435,12 +438,77 @@
       
         <h1 id="WWW19-Jointly-Learning-Explainable-Rules-for-Recommendation-with-Knowledge-Graph"><a href="#WWW19-Jointly-Learning-Explainable-Rules-for-Recommendation-with-Knowledge-Graph" class="headerlink" title="WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph"></a>WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph</h1><p>本文是发表在WWW19上的使用知识图谱做推荐的工作，本文将按照下面几个方面对文章进行解析。</p>
 <ul>
-<li>motivation</li>
-<li>model</li>
-<li>experiments</li>
-<li></li>
+<li>Motivation</li>
+<li>Model</li>
+<li>Experiments</li>
 </ul>
-<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>可解释性</p>
+<h2 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h2><p>目前的推荐系统一般使用side-information进行推荐，然而这些方法总是存在着一些问题。</p>
+<ul>
+<li>通过神经网络的方式训练的embedding进行推荐的可解释性很差，同时难以调参。</li>
+<li>通过在图中提取特征(meta-path等)，这种方式通常需要我们手动构造meta-path这样的话，我们会忽略掉一些物品之间的关系。</li>
+</ul>
+<p>本文希望提出一个合并两种方法的框架进行推荐，做一个相对完善的推荐系统。</p>
+<ul>
+<li>首先通过在知识图谱中挖掘规则，用于辅助推荐</li>
+<li>将规则融合到推荐系统当中</li>
+</ul>
+<p>作者精心挑选了数据集，采用了Amazon的购物的数据集用于进行实验，这是因为用户在购物的时候，我们进行的推荐和其购买历史有着一定的推理的关系。比如说当用户购买了手机的话，我们就不应该对用户再推荐手机，而是推荐一些与手机相关的周边产品，比如说耳机之类的。这种推荐方式，传统的基于矩阵分解的方法很难做到。</p>
+<h2 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h2><p>本文采用了两种基本的推荐系统，BPRMF（传统的矩阵分解模型）和NCF（基于神经网络的推荐系统）作为基本推荐模型。同时在这些模型的基础上，使用自己提出的RuleRec推荐模块叠加到之前的两个模块其中之一。</p>
+<h3 id="BPRMF"><a href="#BPRMF" class="headerlink" title="BPRMF"></a>BPRMF</h3><p>打分函数：</p>
+<script type="math/tex; mode=display">
+S_{ui}=U_u^TI_i</script><p>优化目标：</p>
+<script type="math/tex; mode=display">
+O_{BPRMF}=\sum_{u \in U}\sum_{p\in I_u,n\notin U}(S_{u,p}-S_{u,n})</script><h3 id="NCF"><a href="#NCF" class="headerlink" title="NCF"></a>NCF</h3><p>打分函数</p>
+<script type="math/tex; mode=display">
+\begin{array}
+  & h_{ui} & = & U_u^TI_i\\
+     g_{ui} & = &\phi_n(...\phi_1(z_1))\\
+     & & z_1=\phi(U_u\oplus I_i)\\
+
+     \phi_k(z_{k-1})=\phi_k(W_k^Tz_{k-1}+b_k)
+\end{array}</script><p>优化目标</p>
+<script type="math/tex; mode=display">
+\begin{array}{c}{S_{u, i}=\phi\left(\alpha \cdot \mathbf{h}_{u, i} \oplus(1-\alpha) \cdot \mathbf{g}_{u, i}\right)} \\ {O_{N C F}=\sigma\left(\sum_{v \in U} \sum_{p \in I_{u}, n \notin I_{u}}\left(S_{u, p}-S_{u, n}\right)\right)}\end{array}</script><h3 id="RuleRec"><a href="#RuleRec" class="headerlink" title="RuleRec"></a>RuleRec</h3><p><img src="1.png" alt></p>
+<p>首先作者通过freebase和DBPedia当作知识图谱，之后通过实体链指的方式得到实体与物品之间的对应表。与此同时，作者将Amazon里面的几种关系也添加到了freebase里面，分别是BuyTogether、AlsoBuy等。</p>
+<h4 id="rule-set"><a href="#rule-set" class="headerlink" title="rule set"></a>rule set</h4><p>这一部分，文中没有说明最初的规则集合是怎么得到的，只说了rule的筛选规则。</p>
+<p>所谓rule。指的就是，如果实体之间满足了什么关系，那么很有可能明显的蕴含着一些关系。比如说一个人的出生地是北京，那么他的国籍很有可能就是中国。</p>
+<p>可以通过上图3，文中得到了一个rule集合，这些rule所推出来的结果，都是Amazon数据集里的那四种关系。于是我们可以通过学习每种rule的权重。当用户购买了物品A，那么对物品B的感兴趣程度，其实我们可以通过上面的一系列规则进行衡量。</p>
+<h4 id="rule-calculate"><a href="#rule-calculate" class="headerlink" title="rule calculate"></a>rule calculate</h4><script type="math/tex; mode=display">
+P(b | a, R)=\sum_{e \in N\left(a, R^{\prime}\right)} P\left(e | a, R^{\prime}\right) \cdot P\left(b | e, r_{k}\right)</script><script type="math/tex; mode=display">
+P\left(b | e, r_{k}\right)=\frac{I\left(r_{k}(e, b)\right)}{\sum_{i} I\left(r_{k}(e, i)\right)}</script><h4 id="rule-selection"><a href="#rule-selection" class="headerlink" title="rule selection"></a>rule selection</h4><p>选择的方式有两种 ，分别表示为hard-selection和soft-selection</p>
+<h5 id="Hard-selection"><a href="#Hard-selection" class="headerlink" title="Hard-selection"></a>Hard-selection</h5><ul>
+<li>chi-square<script type="math/tex; mode=display">
+\sum_{\text {allpairse } A} \sum_{i=0}^{\left|\mathbf{x}_{(a, b)}\right|} w_{i} \cdot\left(\mathbf{x}_{(a, b)}(i)+b-y_{a, b | A}\right)^{2}</script></li>
+</ul>
+<ul>
+<li>Linear regrssion<script type="math/tex; mode=display">
+\sum_{\text {allpairs} \in A} \sum_{i=0}^{\left|\mathbf{x}_{(a, b)}\right|}\left(w_{i} \cdot \mathbf{x}_{(a, b)}(i)+b-y_{a, b | A}\right)^{2}</script></li>
+</ul>
+<ul>
+<li>Sigmoid<script type="math/tex; mode=display">
+\sum_{\text {allpairs } \in A} \sum_{i=0}^{\left|\mathbf{x}_{(a, b)}\right|} \frac{w_{i}}{1+e^{-\left|\mathbf{x}_{(a, b)}(i)+b-y_{a, b | A}\right|}}</script></li>
+</ul>
+<p>之后选择top-50的规则，通过一个归一化表示得到权重$w$。使用这个方式的话，相当于整个流程拆成了两个部分，第一个部分是选择规则，第二份部分是将规则和推荐结合到一起。</p>
+<h5 id="Soft-selection"><a href="#Soft-selection" class="headerlink" title="Soft-selection"></a>Soft-selection</h5><p>这个的话，相对麻烦一些，简而言之，就是不筛选规则，而是直接把和第二部分的推荐一起训练。做一个联合学习的方法。</p>
+<h4 id="recommendation"><a href="#recommendation" class="headerlink" title="recommendation"></a>recommendation</h4><script type="math/tex; mode=display">
+S_{u, i}^{\prime}=f_{\mathbf{w}}\left(S_{u, i}, \sum_{k \in I_{u}} F_{(i, k | R)}\right)</script><p>在这里的话，$F$所表示的是$i,k$之间进过规则集合$R$之后是否有通路。</p>
+<p>其中,$f_w$的构建方式很多种，$w$表示的是前面的规则归一化的结果。</p>
+<ul>
+<li><p>Hard filtering</p>
+<script type="math/tex; mode=display">
+S_{u, i}^{\prime}=S_{u, i} \cdot I\left(F_{\left(i, I_{u} | R\right)}\right)</script></li>
+<li><p>Equal weight</p>
+<script type="math/tex; mode=display">
+S_{u, i}^{\prime}=S_{u, i}+\alpha \cdot \mathbf{w}^{\top} F_{\left(i, I_{u} | R\right)}, \text { and } \mathbf{w}=[0.02, \ldots, 0.02]</script></li>
+<li><p>Selection weight</p>
+<script type="math/tex; mode=display">
+S_{u, i}^{\prime}=S_{u, i}+\alpha \cdot \mathbf{w}^{\top} F_{\left(i, I_{u} | R\right)}</script></li>
+<li><p>Learn together</p>
+<script type="math/tex; mode=display">
+f_{\mathbf{w}}(a, b)=a+\mathbf{w}^{\top} b</script></li>
+</ul>
+<h2 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h2><p><img src="2.png" alt></p>
+<p>可以看到实验结果还是相当不错的。但是这两个数据集上，Hec和RippleNet的效果都不如传统的矩阵分解的方法，说明这两种方法的结果似乎都不是很稳定啊。</p>
 
       
     </div>
@@ -686,7 +754,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WWW19-Jointly-Learning-Explainable-Rules-for-Recommendation-with-Knowledge-Graph"><span class="nav-number">1.</span> <span class="nav-text">WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.1.</span> <span class="nav-text">Abstract</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WWW19-Jointly-Learning-Explainable-Rules-for-Recommendation-with-Knowledge-Graph"><span class="nav-number">1.</span> <span class="nav-text">WWW19_Jointly Learning Explainable Rules for Recommendation with Knowledge Graph</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Motivation"><span class="nav-number">1.1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Model"><span class="nav-number">1.2.</span> <span class="nav-text">Model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#BPRMF"><span class="nav-number">1.2.1.</span> <span class="nav-text">BPRMF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NCF"><span class="nav-number">1.2.2.</span> <span class="nav-text">NCF</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RuleRec"><span class="nav-number">1.2.3.</span> <span class="nav-text">RuleRec</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-set"><span class="nav-number">1.2.3.1.</span> <span class="nav-text">rule set</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-calculate"><span class="nav-number">1.2.3.2.</span> <span class="nav-text">rule calculate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rule-selection"><span class="nav-number">1.2.3.3.</span> <span class="nav-text">rule selection</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Hard-selection"><span class="nav-number">1.2.3.3.1.</span> <span class="nav-text">Hard-selection</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Soft-selection"><span class="nav-number">1.2.3.3.2.</span> <span class="nav-text">Soft-selection</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#recommendation"><span class="nav-number">1.2.3.4.</span> <span class="nav-text">recommendation</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiments"><span class="nav-number">1.3.</span> <span class="nav-text">Experiments</span></a></li></ol></li></ol></div>
             
 
           </div>
